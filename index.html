@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System | Created By: Courteny</title>
+    <!-- Styles -->
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            text-decoration: none;
+        }
+        
+        .logo-part-1 {
+            color: #00d9ff;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+            font-size: 40px;
+        }
+        
+        .logo-part-2 {
+            color: #ff0080;
+            text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+            font-size: 40px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(0, 217, 255, 0.1);
+            color: #00d9ff;
+        }
+        
+        .btn-nav {
+            background: linear-gradient(45deg, #00d9ff, #ff0080);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+        
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+        
+        /* ===== VIDEO HERO ===== */
+        .video-hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150%;
+        }
+        
+        #bgVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 20, 40, 0.8), rgba(40, 0, 80, 0.6));
+        }
+        
+        .video-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+            z-index: 2;
+        }
+        
+        .video-title {
+            font-size: 55px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            color: #00d9ff;
+        }
+        
+        .video-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 25px;
+            font-weight: 800;
+            color: #00d9ff;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #aaa;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #00d9ff, #0066ff);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 217, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #00d9ff;
+            border: 2px solid #00d9ff;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background: #00d9ff;
+            color: black;
+            transform: translateY(-3px);
+        }
+        
+        /* ===== PARALLAX SECTION ===== */
+        .parallax-services {
+            background: #111;
+            padding: 100px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            color: #aaa;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .parallax-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .parallax-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .parallax-card:hover {
+            transform: translateY(-10px);
+            border-color: #00d9ff;
+        }
+        
+        .parallax-img-container {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .parallax-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .service-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #00d9ff;
+        }
+        
+        .parallax-content {
+            padding: 30px;
+        }
+        
+        .service-badge {
+            background: rgba(0, 217, 255, 0.1);
+            color: #00d9ff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .service-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .service-description {
+            color: #aaa;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .service-features li {
+            color: #ccc;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .service-features li i {
+            color: #00ff88;
+        }
+        
+        .service-link {
+            color: #00d9ff;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        
+        .service-link:hover {
+            gap: 12px;
+        }
+        
+        /* ===== CAROUSEL SECTION ===== */
+        .carousel-section {
+            background: #0a0a0a;
+            padding: 100px 0;
+            overflow: hidden;
+        }
+        
+        .carousel-wrapper {
+            position: relative;
+        }
+        
+        .carousel-container {
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            width: max-content;
+            animation: scroll 20s linear infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+        
+        .carousel-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            width: 350px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .carousel-item i {
+            font-size: 40px;
+            color: #00d9ff;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .carousel-item h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .carousel-item p {
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        
+        .project-tech {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .project-tech span {
+            background: rgba(0, 217, 255, 0.1);
+            color: #00d9ff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .carousel-btn {
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            color: #00d9ff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-btn:hover {
+            background: #00d9ff;
+            color: black;
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #111;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 900;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 20px;
+        }
+        
+        .footer-description {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: #00d9ff;
+            transform: translateY(-3px);
+        }
+        
+        .footer-title {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #00d9ff;
+            padding-left: 10px;
+        }
+        
+        .contact-info p {
+            color: #aaa;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-info i {
+            color: #00d9ff;
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copyright {
+            color: #666;
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-bottom-links a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        .footer-bottom-links a:hover {
+            color: #00d9ff;
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px;
+                transition: 0.3s;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .video-title {
+                font-size: 36px;
+            }
+            
+            .video-subtitle {
+                font-size: 18px;
+            }
+            
+            .hero-stats {
+                gap: 30px;
+            }
+            
+            .stat-number {
+                font-size: 30px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .carousel-controls {
+                display: none;
+            }
+            
+            .carousel-item {
+                width: 300px;
+            }
+        }
+        
+    </style>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation --> 
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 10px;">
+                <img src="watermark.png" alt="IMS Logo" style="width: 150px; height: 150px; border-radius: 8px; object-fit: cover;">
+                <span style="display: flex; flex-direction: column;">
+                    <span class="logo-part-1">IMS</span>
+                    <span class="logo-part-2">Services</span>
+                </span>
+            </a>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="services.html" class="nav-link"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="./pages/about.html" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="get-quote.html" class="btn-nav"><i class="fas fa-chart-line"></i> Get Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Video Hero -->
+    <section class="video-hero">
+        <div class="video-container">
+            <video autoplay muted loop playsinline id="bgVideo">
+                <source src="clip.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+            <div class="video-content">
+                <h1 class="video-title">
+                    <div>Streamline Your</div>
+                    <div class="highlight">Inventory Management</div>
+                    <div>System</div>
+                </h1>
+                <p class="video-subtitle">Take control of your wholesale, retail, or food industry operations with a powerful, all-in-one Inventory Management Application designed to automate and simplify your workflow.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">99%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Support</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="#services" class="btn-primary">
+                        <i class="fas fa-play-circle"></i> Explore Services
+                    </a>
+                    <a href="#contact" class="btn-secondary">
+                        <i class="fas fa-calendar-check"></i> Schedule Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Services -->
+    <section class="parallax-services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Core <span class="highlight">Services</span></h2>
+                <p class="section-subtitle">Automate your Business Operations</p>
+            </div>
+            
+            <div class="parallax-grid">
+                <!-- Data Entry Card -->
+                <div class="parallax-card">
+                    <div class="parallax-img-container">
+                        <img src="sc1.png" 
+                             alt="Data insights" class="parallax-img">
+                        <div class="service-icon">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                    </div>
+                    <div class="parallax-content">
+                        <span class="service-badge">Summary Overview</span>
+                        <h3 class="service-title">Data Insights</h3>
+                        <p class="service-description">
+                            Transform raw data into actionable insights with our advanced analytics and reporting services.
+                        </p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Descriptive Statistics</li>
+                            <li><i class="fas fa-check-circle"></i> Visuals and Summaries</li>
+                            <li><i class="fas fa-check-circle"></i> Charts & Graphs</li>
+                            <li><i class="fas fa-check-circle"></i> Pivottables</li>
+                        </ul>
+                        <a href="#" class="service-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Inventory Card -->
+                <div class="parallax-card">
+                    <div class="parallax-img-container">
+                        <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Inventory Management" class="parallax-img">
+                        <div class="service-icon">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                    </div>
+                    <div class="parallax-content">
+                        <span class="service-badge">Inventory Tracking</span>
+                        <h3 class="service-title">Inventory Management</h3>
+                        <p class="service-description">
+                            Complete inventory tracking, stock management, and warehouse organization solutions.
+                            Real-time updates and analytics.
+                        </p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Stock Tracking</li>
+                            <li><i class="fas fa-check-circle"></i> Warehouse Management</li>
+                            <li><i class="fas fa-check-circle"></i> Demand Forecasting</li>
+                            <li><i class="fas fa-check-circle"></i> Inventory Analytics</li>
+                        </ul>
+                        <a href="#" class="service-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Analytics Card -->
+                <div class="parallax-card">
+                    <div class="parallax-img-container">
+                        <img src="sc2.png" 
+                             alt="Data Analytics" class="parallax-img">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                    </div>
+                    <div class="parallax-content">
+                        <span class="service-badge">Automation</span>
+                        <h3 class="service-title">Product Entry</h3>
+                        <p class="service-description">
+                            Automate your Business and reporting processes with our automated userforms interface.
+                        </p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Automated Forms</li>
+                            <li><i class="fas fa-check-circle"></i> Sales Real-Time Tracking</li>
+                            <li><i class="fas fa-check-circle"></i> Expiry Notification</li>
+                            <li><i class="fas fa-check-circle"></i> Balance In and Out</li>
+                        </ul>
+                        <a href="#" class="service-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+                <!-- Facebook Video Section -->
+    <section class="facebook-video-section" style="background: #0a0a0a; padding: 100px 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Watch Our <span class="highlight">Demo</span></h2>
+                <p class="section-subtitle">See how to automate your Business using Excel Spreadsheets</p>
+            </div>
+            
+            <div style="max-width: 800px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0, 217, 255, 0.1);">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+                    <iframe 
+                        src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2078866006251188%2F&show_text=false&width=560" 
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
+                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="color: #aaa; max-width: 600px; margin: 0 auto 30px;">
+                    Learn how our data entry and inventory management solutions can streamline your business operations.
+                </p>
+                <a href="#contact" class="btn-primary" style="display: inline-flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-play-circle"></i> Schedule Live Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carousel Section -->
+    <section class="carousel-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured <span class="highlight">Services</span></h2>
+                <p class="section-subtitle">Success stories from our valued clients across various industries</p>
+            </div>
+            
+            <div class="carousel-wrapper">
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Carousel items will be added by JavaScript -->
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">
+                        <span class="logo-part-1">I</span><span class="logo-part-2">MS</span>
+                    </a>
+                    <p class="footer-description">
+                        Professional data entry and inventory management solutions for Retail Industry.
+                        We streamline your operations with precision and efficiency.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Data Entry Services</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Inventory Management</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Data Management</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Automation Process</a></li>
+                
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Bulacan, Philippines</p>
+                        <p><i class="fas fa-phone"></i> 0953-544-2371</p>
+                        <p><i class="fas fa-envelope"></i> madronerokurt04@gmail.com</p>
+                    
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Inventory Management System. All rights reserved By: Courteny.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookies Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+            <!-- JavaScript -->
+    <script>
+        // Mobile Navigation
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
+            });
+        }
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Carousel Items
+        const carouselItems = [
+            {
+                icon: 'fas fa-database',
+                title: 'Inventory System Implementation',
+                description: 'Complete inventory management system for retail chain with 500+ SKUs',
+                tags: ['Inventory', 'ERP', 'Integration']
+            },
+            {
+                icon: 'fas fa-file-excel',
+                title: 'Data Migration Project',
+                description: 'Migrated 50,000+ records from legacy system to modern database',
+                tags: ['Data Migration', 'Excel', 'Automation']
+            },
+            {
+                icon: 'fas fa-warehouse',
+                title: 'Warehouse Management',
+                description: 'Real-time tracking system for warehouse with barcode integration',
+                tags: ['Warehouse', 'Tracking', 'Barcode']
+            },
+            {
+                icon: 'fas fa-chart-pie',
+                title: 'Sales Analytics Dashboard',
+                description: 'Interactive dashboard for sales data visualization and reporting',
+                tags: ['Analytics', 'Dashboard', 'Reporting']
+            },
+            {
+                icon: 'fas fa-sync-alt',
+                title: 'Process Automation',
+                description: 'Automated data entry processes saving 40+ hours weekly',
+                tags: ['Automation', 'Efficiency', 'Workflow']
+            },
+            {
+                icon: 'fas fa-shipping-fast',
+                title: 'Supply Chain Tracking',
+                description: 'End-to-end supply chain tracking with predictive analytics',
+                tags: ['Supply Chain', 'Tracking', 'Analytics']
+            }
+        ];
+        
+        // Initialize Carousel
+        const carouselTrack = document.getElementById('carouselTrack');
+        if (carouselTrack) {
+            // Clear any existing content
+            carouselTrack.innerHTML = '';
+            
+            // Add items twice for infinite effect
+            const itemsToShow = [...carouselItems, ...carouselItems];
+            
+            itemsToShow.forEach(item => {
+                const carouselItem = document.createElement('div');
+                carouselItem.className = 'carousel-item';
+                carouselItem.innerHTML = `
+                    <i class="${item.icon}"></i>
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <div class="project-tech">
+                        ${item.tags.map(tag => `<span>${tag}</span>`).join('')}
+                    </div>
+                `;
+                carouselTrack.appendChild(carouselItem);
+            });
+        }
+        
+        // Carousel Controls
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        
+        if (prevBtn && nextBtn && carouselTrack) {
+            prevBtn.addEventListener('click', () => {
+                carouselTrack.scrollLeft -= 380;
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                carouselTrack.scrollLeft += 380;
+            });
+        }
+        
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const parallaxCards = document.querySelectorAll('.parallax-card');
+            const scrolled = window.pageYOffset;
+            
+            parallaxCards.forEach((card, index) => {
+                const speed = 0.1 + (index * 0.05);
+                const yPos = -(scrolled * speed);
+                card.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Question Cloud for Logo (Hover version)
+        document.addEventListener('DOMContentLoaded', () => {
+            const logo = document.querySelector('.logo');
+            if (!logo) return;
+            
+            const cloud = document.createElement('div');
+            
+            cloud.style.position = 'absolute';
+            cloud.style.top = '110%';
+            cloud.style.left = '0';
+            cloud.style.background = 'rgba(0, 217, 255, 0.95)';
+            cloud.style.color = '#111';
+            cloud.style.padding = '15px';
+            cloud.style.borderRadius = '16px';
+            cloud.style.width = '230px';
+            cloud.style.boxShadow = '0 10px 25px rgba(0, 217, 255, 0.35)';
+            cloud.style.border = '2px solid white';
+            cloud.style.opacity = '0';
+            cloud.style.transform = 'translateY(-10px)';
+            cloud.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            cloud.style.pointerEvents = 'none';
+            cloud.style.zIndex = '2000';
+            
+            cloud.innerHTML = `
+                <div style="
+                    position:absolute;
+                    top:-10px;
+                    left:30px;
+                    width:0;
+                    height:0;
+                    border-left:10px solid transparent;
+                    border-right:10px solid transparent;
+                    border-bottom:10px solid rgba(0,217,255,0.95);
+                "></div>
+                
+                <p style="margin:0; font-size:14px; font-weight:600;">
+                    Need help with our services❓
+                </p>
+                
+                <div style="display:flex; gap:10px; margin-top:10px;">
+                    <a href="#" style="
+                        background:#ff0080;
+                        color:#fff;
+                        padding:6px 12px;
+                        border-radius:14px;
+                        font-size:12px;
+                        text-decoration:none;
+                        font-weight:600;
+                    ">FAQs</a>
+                    
+                    <a href="contact.html" style="
+                        background:#00d9ff;
+                        color:#000;
+                        padding:6px 12px;
+                        border-radius:14px;
+                        font-size:12px;
+                        text-decoration:none;
+                        font-weight:600;
+                    ">Contact</a>
+                </div>
+            `;
+            
+            logo.style.position = 'relative';
+            logo.appendChild(cloud);
+            
+            logo.addEventListener('mouseenter', () => {
+                cloud.style.opacity = '1';
+                cloud.style.transform = 'translateY(0)';
+            });
+            
+            logo.addEventListener('mouseleave', () => {
+                cloud.style.opacity = '0';
+                cloud.style.transform = 'translateY(-10px)';
+            });
+        });
+    </script>
+        <!-- Arrow Navigation -->
+    <div id="arrowNav" style="position: fixed; right: 30px; bottom: 30px; z-index: 999; display: flex; flex-direction: column; gap: 10px; opacity: 0; transform: translateY(20px); transition: all 0.3s ease;">
+        <button id="arrowUp" style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, #00d9ff, #0066ff); border: 2px solid white; color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0, 217, 255, 0.3); transition: all 0.3s ease;">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+        <button id="arrowDown" style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, #ff0080, #ff0066); border: 2px solid white; color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(255, 0, 128, 0.3); transition: all 0.3s ease;">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+
+    <script>
+        // Arrow Navigation
+        const arrowNav = document.getElementById('arrowNav');
+        const arrowUp = document.getElementById('arrowUp');
+        const arrowDown = document.getElementById('arrowDown');
+        
+        // Show/hide arrows based on scroll position
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // Show arrows after scrolling down a bit
+            if (scrolled > 100) {
+                arrowNav.style.opacity = '1';
+                arrowNav.style.transform = 'translateY(0)';
+            } else {
+                arrowNav.style.opacity = '0';
+                arrowNav.style.transform = 'translateY(20px)';
+            }
+            
+            // Hide up arrow at top of page
+            if (scrolled < 100) {
+                arrowUp.style.opacity = '0.5';
+                arrowUp.style.pointerEvents = 'none';
+            } else {
+                arrowUp.style.opacity = '1';
+                arrowUp.style.pointerEvents = 'auto';
+            }
+            
+            // Hide down arrow at bottom of page
+            if (scrolled + windowHeight >= documentHeight - 100) {
+                arrowDown.style.opacity = '0.5';
+                arrowDown.style.pointerEvents = 'none';
+            } else {
+                arrowDown.style.opacity = '1';
+                arrowDown.style.pointerEvents = 'auto';
+            }
+        });
+        
+        // Up arrow click - scroll to top
+        arrowUp.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Down arrow click - scroll to next section
+        arrowDown.addEventListener('click', () => {
+            const currentScroll = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const sections = document.querySelectorAll('section');
+            
+            // Find the next section
+            let nextSection = null;
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (sectionTop > currentScroll + 100) {
+                    if (!nextSection || sectionTop < nextSection.offsetTop) {
+                        nextSection = section;
+                    }
+                }
+            });
+            
+            // If no next section found, scroll to bottom
+            if (nextSection) {
+                window.scrollTo({
+                    top: nextSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            } else {
+                window.scrollTo({
+                    top: document.documentElement.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        
+        // Hover effects
+        arrowUp.addEventListener('mouseenter', () => {
+            arrowUp.style.transform = 'scale(1.1)';
+            arrowUp.style.boxShadow = '0 8px 20px rgba(0, 217, 255, 0.5)';
+        });
+        
+        arrowUp.addEventListener('mouseleave', () => {
+            arrowUp.style.transform = 'scale(1)';
+            arrowUp.style.boxShadow = '0 5px 15px rgba(0, 217, 255, 0.3)';
+        });
+        
+        arrowDown.addEventListener('mouseenter', () => {
+            arrowDown.style.transform = 'scale(1.1)';
+            arrowDown.style.boxShadow = '0 8px 20px rgba(255, 0, 128, 0.5)';
+        });
+        
+        arrowDown.addEventListener('mouseleave', () => {
+            arrowDown.style.transform = 'scale(1)';
+            arrowDown.style.boxShadow = '0 5px 15px rgba(255, 0, 128, 0.3)';
+        });
+    </script>
+</body>
+</html>

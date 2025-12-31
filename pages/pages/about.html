@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | IMS Services - Stock Controller & Data Entry Specialist</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-part-1 {
+            color: #00d9ff;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+            font-size: 40px;
+        }
+        
+        .logo-part-2 {
+            color: #ff0080;
+            text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+            font-size: 40px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(0, 217, 255, 0.1);
+            color: #00d9ff;
+        }
+        
+        .btn-nav {
+            background: linear-gradient(45deg, #00d9ff, #ff0080);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+        
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .about-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+            padding: 120px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path fill="%2300d9ff10" d="M500,250c138.07,0,250,111.93,250,250S638.07,750,500,750S250,638.07,250,500S361.93,250,500,250z"/></svg>');
+            background-size: 300px;
+            opacity: 0.1;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid #00d9ff;
+            margin: 0 auto 30px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-title {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            color: #00d9ff;
+        }
+        
+        .hero-subtitle {
+            font-size: 22px;
+            color: #ff0080;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .hero-description {
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            min-width: 150px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero-stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: #00d9ff;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .hero-stat-label {
+            color: #aaa;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* ===== EXPERTISE SECTION ===== */
+        .expertise-section {
+            background: #111;
+            padding: 100px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            color: #aaa;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .expertise-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .expertise-card:hover {
+            transform: translateY(-10px);
+            border-color: #00d9ff;
+            background: rgba(0, 217, 255, 0.05);
+        }
+        
+        .expertise-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: #00d9ff;
+            margin-bottom: 25px;
+        }
+        
+        .expertise-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .expertise-description {
+            color: #aaa;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .expertise-features {
+            list-style: none;
+        }
+        
+        .expertise-features li {
+            color: #ccc;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .expertise-features li i {
+            color: #00ff88;
+        }
+        
+        /* ===== EXPERIENCE SECTION ===== */
+        .experience-section {
+            background: #0a0a0a;
+            padding: 100px 0;
+        }
+        
+        .experience-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #00d9ff, #ff0080);
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #00d9ff;
+            border-radius: 50%;
+            border: 3px solid #0a0a0a;
+            z-index: 1;
+        }
+        
+        .timeline-year {
+            color: #ff0080;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .timeline-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .timeline-description {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* ===== SKILLS SECTION ===== */
+        .skills-section {
+            background: #111;
+            padding: 100px 0;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .skill-category-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #00d9ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            padding: 12px 0;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-list li i {
+            color: #00ff88;
+        }
+        
+        .skill-level {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: auto;
+        }
+        
+        .skill-level span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .skill-level span.active {
+            background: #00d9ff;
+        }
+        
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-description {
+            color: #aaa;
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #00d9ff, #0066ff);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 217, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #00d9ff;
+            border: 2px solid #00d9ff;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+        
+        .btn-secondary:hover {
+            background: #00d9ff;
+            color: black;
+            transform: translateY(-3px);
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #111;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 900;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 20px;
+        }
+        
+        .footer-description {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: #00d9ff;
+            transform: translateY(-3px);
+        }
+        
+        .footer-title {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #00d9ff;
+            padding-left: 10px;
+        }
+        
+        .contact-info p {
+            color: #aaa;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-info i {
+            color: #00d9ff;
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copyright {
+            color: #666;
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-bottom-links a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        .footer-bottom-links a:hover {
+            color: #00d9ff;
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px;
+                transition: 0.3s;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .hero-stat-number {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .experience-timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                flex-direction: row !important;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+            }
+            
+            .timeline-dot {
+                left: 30px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation --> 
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="watermark.png" alt="IMS Logo" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;">
+                <span style="display: flex; flex-direction: column;">
+                    <span class="logo-part-1">IMS</span>
+                    <span class="logo-part-2">Services</span>
+                </span>
+            </a>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="services.html" class="nav-link"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="about.html" class="nav-link active"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="get-quote.html" class="btn-nav"><i class="fas fa-chart-line"></i> Get Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="profile-image">
+                    <!-- Add your profile photo here -->
+                    <img src="profile.jpg" alt="Kurt Madronero - Stock Controller & Data Entry Specialist" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'">
+                </div>
+                <h1 class="hero-title">Kurt <span class="highlight">Madronero</span></h1>
+                <p class="hero-subtitle">Certified Stock Controller & Data Entry Specialist</p>
+                <p class="hero-description">
+                    With over 5 years of expertise in inventory management and data processing, 
+                    I help businesses streamline their operations through accurate stock control 
+                    and efficient data management systems. Specializing in Excel automation and 
+                    inventory optimization.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">5+</span>
+                        <span class="hero-stat-label">Years Experience</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">500+</span>
+                        <span class="hero-stat-label">Projects Completed</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">99.8%</span>
+                        <span class="hero-stat-label">Accuracy Rate</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">50+</span>
+                        <span class="hero-stat-label">Happy Clients</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section class="expertise-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">My <span class="highlight">Expertise</span></h2>
+                <p class="section-subtitle">Specialized services in inventory control and data management</p>
+            </div>
+            
+            <div class="expertise-grid">
+                <!-- Stock Control Expertise -->
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <h3 class="expertise-title">Stock Control & Inventory Management</h3>
+                    <p class="expertise-description">
+                        Comprehensive inventory tracking, stock optimization, and warehouse management 
+                        solutions for retail, wholesale, and manufacturing businesses.
+                    </p>
+                    <ul class="expertise-features">
+                        <li><i class="fas fa-check-circle"></i> Real-time Stock Tracking</li>
+                        <li><i class="fas fa-check-circle"></i> Inventory Optimization</li>
+                        <li><i class="fas fa-check-circle"></i> Warehouse Management Systems</li>
+                        <li><i class="fas fa-check-circle"></i> Stock Replenishment Planning</li>
+                        <li><i class="fas fa-check-circle"></i> Inventory Valuation & Reporting</li>
+                        <li><i class="fas fa-check-circle"></i> Loss Prevention Strategies</li>
+                    </ul>
+                </div>
+                
+                <!-- Data Entry Expertise -->
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <h3 class="expertise-title">Data Entry & Processing</h3>
+                    <p class="expertise-description">
+                        Accurate and efficient data processing services including data cleaning, 
+                        validation, migration, and database management.
+                    </p>
+                    <ul class="expertise-features">
+                        <li><i class="fas fa-check-circle"></i> High-Speed Data Entry</li>
+                        <li><i class="fas fa-check-circle"></i> Data Cleaning & Validation</li>
+                        <li><i class="fas fa-check-circle"></i> Excel & Google Sheets Expert</li>
+                        <li><i class="fas fa-check-circle"></i> Database Management</li>
+                        <li><i class="fas fa-check-circle"></i> OCR Data Extraction</li>
+                        <li><i class="fas fa-check-circle"></i> Report Generation</li>
+                    </ul>
+                </div>
+                
+                <!-- Excel Automation Expertise -->
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <h3 class="expertise-title">Excel Automation & Systems</h3>
+                    <p class="expertise-description">
+                        Custom Excel solutions including automated reports, dashboards, and complete 
+                        inventory management systems using advanced Excel functions.
+                    </p>
+                    <ul class="expertise-features">
+                        <li><i class="fas fa-check-circle"></i> Custom Excel Dashboards</li>
+                        <li><i class="fas fa-check-circle"></i> VBA Macro Development</li>
+                        <li><i class="fas fa-check-circle"></i> Automated Reporting Systems</li>
+                        <li><i class="fas fa-check-circle"></i> Inventory Tracking Templates</li>
+                        <li><i class="fas fa-check-circle"></i> Data Analysis Tools</li>
+                        <li><i class="fas fa-check-circle"></i> User Form Development</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Professional <span class="highlight">Experience</span></h2>
+                <p class="section-subtitle">My journey in inventory and data management</p>
+            </div>
+            
+            <div class="experience-timeline">
+                <!-- Experience 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2022 - Present</span>
+                        <h3 class="timeline-title">Freelance Inventory Consultant</h3>
+                        <p class="timeline-description">
+                            Providing inventory management consulting and Excel automation services 
+                            to various clients across retail, wholesale, and e-commerce sectors.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Experience 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2020 - 2022</span>
+                        <h3 class="timeline-title">Senior Stock Controller</h3>
+                        <p class="timeline-description">
+                            Managed inventory for a retail chain with 10+ stores, implemented 
+                            automated tracking systems, reduced stock discrepancies by 40%.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Experience 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2018 - 2020</span>
+                        <h3 class="timeline-title">Data Entry Specialist</h3>
+                        <p class="timeline-description">
+                            Processed large volumes of inventory data with 99.8% accuracy, 
+                            developed Excel templates that increased team productivity by 60%.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Experience 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2017 - 2018</span>
+                        <h3 class="timeline-title">Inventory Assistant</h3>
+                        <p class="timeline-description">
+                            Started career in inventory management, learned stock control 
+                            fundamentals and developed passion for data optimization.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical <span class="highlight">Skills</span></h2>
+                <p class="section-subtitle">Proficiency in inventory management and data processing tools</p>
+            </div>
+            
+            <div class="skills-grid">
+                <!-- Inventory Skills -->
+                <div class="skill-category">
+                    <h3 class="skill-category-title">
+                        <i class="fas fa-warehouse"></i> Inventory Management
+                    </h3>
+                    <ul class="skill-list">
+                        <li>
+                            <i class="fas fa-check"></i> Stock Control Systems
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Warehouse Operations
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Inventory Forecasting
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Stock Reconciliation
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Excel Skills -->
+                <div class="skill-category">
+                    <h3 class="skill-category-title">
+                        <i class="fas fa-file-excel"></i> Microsoft Excel
+                    </h3>
+                    <ul class="skill-list">
+                        <li>
+                            <i class="fas fa-check"></i> Advanced Formulas
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> VBA & Macros
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Pivot Tables & Charts
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Data Analysis Tools
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Data Skills -->
+                <div class="skill-category">
+                    <h3 class="skill-category-title">
+                        <i class="fas fa-database"></i> Data Management
+                    </h3>
+                    <ul class="skill-list">
+                        <li>
+                            <i class="fas fa-check"></i> Data Entry & Processing
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Database Management
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Data Validation
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Report Generation
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Software Skills -->
+                <div class="skill-category">
+                    <h3 class="skill-category-title">
+                        <i class="fas fa-laptop-code"></i> Software & Tools
+                    </h3>
+                    <ul class="skill-list">
+                        <li>
+                            <i class="fas fa-check"></i> Google Sheets
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> QuickBooks
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span></span><span></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Inventory Software
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Microsoft Access
+                            <div class="skill-level">
+                                <span class="active"></span><span class="active"></span><span class="active"></span><span></span><span></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need Expert <span class="highlight">Inventory Management</span>?</h2>
+                <p class="cta-description">
+                    Let's streamline your stock control and data processing. Get a custom solution 
+                    tailored to your business needs with guaranteed accuracy and efficiency.
+                </p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a href="get-quote.html" class="btn-primary">
+                        <i class="fas fa-chart-line"></i> Get Custom Quote
+                    </a>
+                    <a href="contact.html" class="btn-secondary">
+                        <i class="fas fa-envelope"></i> Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <span class="logo-part-1">I</span><span class="logo-part-2">MS</span>
+                    </a>
+                    <p class="footer-description">
+                        Professional inventory management and data entry solutions. 
+                        Specializing in Excel automation, stock control, and business process optimization.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="get-quote.html"><i class="fas fa-chevron-right"></i> Get Quote</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">My Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Stock Control</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Inventory Management</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Data Entry Services</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Excel Automation</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Business Process Optimization</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Bulacan, Philippines</p>
+                        <p><i class="fas fa-phone"></i> 0953-544-2371</p>
+                        <p><i class="fas fa-envelope"></i> madronerokurt04@gmail.com</p>
+                        <p><i class="fas fa-clock"></i> Mon - Sat: 9:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Kurt Madronero - IMS Services. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

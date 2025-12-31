@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Quote | Inventory Management System</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-part-1 {
+            color: #00d9ff;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+            font-size: 40px;
+        }
+        
+        .logo-part-2 {
+            color: #ff0080;
+            text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+            font-size: 40px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(0, 217, 255, 0.1);
+            color: #00d9ff;
+        }
+        
+        .btn-nav {
+            background: linear-gradient(45deg, #00d9ff, #ff0080);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+        
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .quote-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+            padding: 120px 0 60px;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            color: #00d9ff;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: #aaa;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* ===== QUOTE FORM SECTION ===== */
+        .quote-section {
+            padding: 80px 0;
+            background: #111;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .section-subtitle {
+            color: #aaa;
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .quote-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        @media (max-width: 768px) {
+            .quote-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #00d9ff;
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        .form-control::placeholder {
+            color: #666;
+        }
+        
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2300d9ff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            padding-right: 50px;
+        }
+        
+        .file-upload-area {
+            border: 2px dashed rgba(0, 217, 255, 0.3);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .file-upload-area:hover {
+            border-color: #00d9ff;
+            background: rgba(0, 217, 255, 0.05);
+        }
+        
+        .file-upload-area.dragover {
+            border-color: #00d9ff;
+            background: rgba(0, 217, 255, 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 50px;
+            color: #00d9ff;
+            margin-bottom: 15px;
+        }
+        
+        .file-info {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .file-info.show {
+            display: block;
+        }
+        
+        .file-name {
+            color: #00d9ff;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .file-size {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        .remove-file {
+            background: #ff0080;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, #00d9ff, #0066ff);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 217, 255, 0.3);
+        }
+        
+        /* ===== PRICING SECTION ===== */
+        .pricing-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pricing-title {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #00d9ff;
+            text-align: center;
+        }
+        
+        .price-card {
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+        }
+        
+        .price-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .price-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .price-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #00d9ff;
+        }
+        
+        .price-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .price-features li {
+            padding: 8px 0;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .price-features li i {
+            color: #00ff88;
+        }
+        
+        .buy-btn {
+            background: linear-gradient(45deg, #ff0080, #ff0066);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 128, 0.3);
+        }
+        
+        .payment-methods {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .payment-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+        
+        .payment-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .payment-icon {
+            width: 60px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #aaa;
+        }
+        
+        /* ===== PAYMENT MODAL ===== */
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .payment-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #111;
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #00d9ff;
+            text-align: center;
+        }
+        
+        .payment-option {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .payment-option:hover {
+            background: rgba(0, 217, 255, 0.1);
+            border-color: #00d9ff;
+        }
+        
+        .payment-option.active {
+            background: rgba(0, 217, 255, 0.15);
+            border-color: #00d9ff;
+        }
+        
+        .payment-option-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .payment-icon-large {
+            font-size: 30px;
+            color: #00d9ff;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .payment-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .payment-desc {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        .pay-now-btn {
+            background: linear-gradient(45deg, #00d9ff, #0066ff);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .pay-now-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 217, 255, 0.3);
+        }
+        
+        /* ===== SUCCESS MESSAGE ===== */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .success-icon {
+            font-size: 80px;
+            color: #00ff88;
+            margin-bottom: 20px;
+        }
+        
+        .success-title {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #00ff88;
+        }
+        
+        .success-text {
+            color: #aaa;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #111;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 900;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 20px;
+        }
+        
+        .footer-description {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: #00d9ff;
+            transform: translateY(-3px);
+        }
+        
+        .footer-title {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #00d9ff;
+            padding-left: 10px;
+        }
+        
+        .contact-info p {
+            color: #aaa;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-info i {
+            color: #00d9ff;
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copyright {
+            color: #666;
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-bottom-links a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        .footer-bottom-links a:hover {
+            color: #00d9ff;
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px;
+                transition: 0.3s;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .form-container,
+            .pricing-container {
+                padding: 30px 20px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation --> 
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="watermark.png" alt="IMS Logo" style="width: 150px; height: 150px; border-radius: 8px; object-fit: cover;">
+                <span style="display: flex; flex-direction: column;">
+                    <span class="logo-part-1">IMS</span>
+                    <span class="logo-part-2">Services</span>
+                </span>
+            </a>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="services.html" class="nav-link"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="about.html" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="get-quote.html" class="nav-link active"><i class="fas fa-chart-line"></i> Get Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="quote-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Get Your <span class="highlight">Custom Quote</span></h1>
+                <p class="hero-subtitle">
+                    Upload your Excel file and get a personalized quote for our Inventory Management System. 
+                    Choose from our packages or request a custom solution.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Form Section -->
+    <section class="quote-section">
+        <div class="container">
+            <h2 class="section-title">Upload Your <span class="highlight">Excel File</span></h2>
+            <p class="section-subtitle">Share your requirements and we'll provide the perfect solution</p>
+            
+            <div class="quote-container">
+                <!-- Form Column -->
+                <div class="form-container">
+                    <form id="quoteForm">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Company Name</label>
+                            <input type="text" class="form-control" placeholder="Enter company name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Business Type</label>
+                            <select class="form-control" required>
+                                <option value="">Select business type</option>
+                                <option value="retail">Retail</option>
+                                <option value="wholesale">Wholesale</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="ecommerce">E-commerce</option>
+                                <option value="food">Food Industry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Project Description</label>
+                            <textarea class="form-control" placeholder="Describe your inventory management needs..." rows="4"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Upload Excel File</label>
+                            <div class="file-upload-area" id="fileUploadArea">
+                                <div class="upload-icon">
+                                    <i class="fas fa-file-excel"></i>
+                                </div>
+                                <h3 style="margin-bottom: 10px;">Drag & Drop Excel File</h3>
+                                <p style="color: #aaa; margin-bottom: 15px;">or click to browse</p>
+                                <p style="font-size: 14px; color: #666;">Supported formats: .xlsx, .xls, .csv</p>
+                                <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="display: none;">
+                            </div>
+                            <div class="file-info" id="fileInfo">
+                                <div class="file-name" id="fileName"></div>
+                                <div class="file-size" id="fileSize"></div>
+                                <button type="button" class="remove-file" id="removeFile">
+                                    <i class="fas fa-times"></i> Remove File
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Submit Quote Request
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Pricing Column -->
+                <div class="pricing-container">
+                    <h3 class="pricing-title">Available Packages</h3>
+                    
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h4 class="price-title">Basic Package</h4>
+                            <div class="price-amount">₱5,000</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check-circle"></i> Inventory Management System</li>
+                            <li><i class="fas fa-check-circle"></i> Excel Data Import/Export</li>
+                            <li><i class="fas fa-check-circle"></i> Basic Reporting</li>
+                            <li><i class="fas fa-check-circle"></i> 30 Days Support</li>
+                        </ul>
+                        <button class="buy-btn" data-package="basic">
+                            <i class="fas fa-shopping-cart"></i> Purchase Now
+                        </button>
+                    </div>
+                    
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h4 class="price-title">Pro Package</h4>
+                            <div class="price-amount">₱10,000</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check-circle"></i> Everything in Basic</li>
+                            <li><i class="fas fa-check-circle"></i> Advanced Analytics Dashboard</li>
+                            <li><i class="fas fa-check-circle"></i> Automated Reports</li>
+                            <li><i class="fas fa-check-circle"></i> Custom Forms</li>
+                            <li><i class="fas fa-check-circle"></i> 90 Days Support</li>
+                        </ul>
+                        <button class="buy-btn" data-package="pro">
+                            <i class="fas fa-shopping-cart"></i> Purchase Now
+                        </button>
+                    </div>
+                    
+                    <div class="price-card">
+                        <div class="price-header">
+                            <h4 class="price-title">Enterprise Package</h4>
+                            <div class="price-amount">₱20,000</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check-circle"></i> Everything in Pro</li>
+                            <li><i class="fas fa-check-circle"></i> Multi-User Access</li>
+                            <li><i class="fas fa-check-circle"></i> API Integration</li>
+                            <li><i class="fas fa-check-circle"></i> Priority Support</li>
+                            <li><i class="fas fa-check-circle"></i> Custom Development</li>
+                            <li><i class="fas fa-check-circle"></i> 1 Year Support</li>
+                        </ul>
+                        <button class="buy-btn" data-package="enterprise">
+                            <i class="fas fa-shopping-cart"></i> Purchase Now
+                        </button>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <h4 class="payment-title">Accepted Payment Methods</h4>
+                        <div class="payment-icons">
+                            <div class="payment-icon">
+                                <i class="fab fa-cc-paypal"></i>
+                            </div>
+                            <div class="payment-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="payment-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="payment-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title">Complete Your Purchase</h3>
+            
+            <div class="payment-option" data-method="paypal">
+                <div class="payment-option-header">
+                    <div class="payment-icon-large">
+                        <i class="fab fa-paypal"></i>
+                    </div>
+                    <div>
+                        <div class="payment-name">PayPal</div>
+                        <div class="payment-desc">Pay securely with PayPal account</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payment-option" data-method="gcash">
+                <div class="payment-option-header">
+                    <div class="payment-icon-large">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div>
+                        <div class="payment-name">GCash</div>
+                        <div class="payment-desc">Pay via GCash mobile wallet</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payment-option" data-method="bank">
+                <div class="payment-option-header">
+                    <div class="payment-icon-large">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div>
+                        <div class="payment-name">Bank Transfer</div>
+                        <div class="payment-desc">Direct bank deposit/transfer</div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="pay-now-btn" id="payNowBtn">
+                <i class="fas fa-lock"></i> Pay Now
+            </button>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <div class="container">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="success-title">Payment Successful!</h2>
+            <p class="success-text">
+                Thank you for your purchase! We've received your payment and will process your order shortly. 
+                You'll receive the Inventory Management System file and installation instructions via email within 24 hours.
+            </p>
+            <a href="index.html" class="submit-btn" style="max-width: 300px; margin: 0 auto;">
+                <i class="fas fa-home"></i> Return to Home
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <span class="logo-part-1">I</span><span class="logo-part-2">MS</span>
+                    </a>
+                    <p class="footer-description">
+                        Professional inventory management solutions for businesses worldwide.
+                        We streamline your operations with precision and efficiency.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="get-quote.html"><i class="fas fa-chevron-right"></i> Get Quote</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Data Entry Services</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Inventory Management</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Data Automation</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Process Optimization</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Bulacan, Philippines</p>
+                        <p><i class="fas fa-phone"></i> 0953-544-2371</p>
+                        <p><i class="fas fa-envelope"></i> madronerokurt04@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Inventory Management System. All rights reserved By: Courteny.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookies Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
+            });
+        }
+        
+        // File Upload Functionality
+        const fileInput = document.getElementById('fileInput');
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const removeFileBtn = document.getElementById('removeFile');
+        
+        // Click to upload
+        fileUploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        // File input change
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                displayFileInfo(file);
+            }
+        });
+        
+        // Drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileUploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileUploadArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileUploadArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            fileUploadArea.classList.add('dragover');
+        }
+        
+        function unhighlight() {
+            fileUploadArea.classList.remove('dragover');
+        }
+        
+        fileUploadArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                const file = files[0];
+                if (isExcelFile(file)) {
+                    displayFileInfo(file);
+                    fileInput.files = files;
+                } else {
+                    alert('Please upload only Excel files (.xlsx, .xls, .csv)');
+                }
+            }
+        }
+        
+        function isExcelFile(file) {
+            const acceptedTypes = [
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'application/vnd.ms-excel',
+                'text/csv'
+            ];
+            const acceptedExtensions = ['.xlsx', '.xls', '.csv'];
+            const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+            
+            return acceptedTypes.includes(file.type) || acceptedExtensions.includes(fileExtension);
+        }
+        
+        function displayFileInfo(file) {
+            fileName.textContent = file.name;
+            fileSize.textContent = formatFileSize(file.size);
+            fileInfo.classList.add('show');
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        removeFileBtn.addEventListener('click', () => {
+            fileInput.value = '';
+            fileInfo.classList.remove('show');
+        });
+        
+        // Quote Form Submission
+        const quoteForm = document.getElementById('quoteForm');
+        quoteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(quoteForm);
+            const file = fileInput.files[0];
+            if (file) {
+                formData.append('excelFile', file);
+            }
+            
+            // Here you would typically send this to your server
+            // For demo, we'll just show an alert
+            alert('Quote request submitted successfully! We will contact you within 24 hours.');
+            quoteForm.reset();
+            fileInfo.classList.remove('show');
+        });
+        
+        // Payment Modal
+        const paymentModal = document.getElementById('paymentModal');
+        const modalClose = document.getElementById('modalClose');
+        const buyButtons = document.querySelectorAll('.buy-btn');
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        const payNowBtn = document.getElementById('payNowBtn');
+        const successMessage = document.getElementById('successMessage');
+        
+        let selectedPackage = '';
+        let selectedPaymentMethod = '';
+        
+        // Buy button click
+        buyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                selectedPackage = button.getAttribute('data-package');
+                paymentModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close modal
+        modalClose.addEventListener('click', () => {
+            paymentModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Click outside modal to close
+        paymentModal.addEventListener('click', (e) => {
+            if (e.target === paymentModal) {
+                paymentModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Payment option selection
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                paymentOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                selectedPaymentMethod = option.getAttribute('data-method');
+            });
+        });
+        
+        // Pay Now button
+        payNowBtn.addEventListener('click', () => {
+            if (!selectedPaymentMethod) {
+                alert('Please select a payment method');
+                return;
+            }
+            
+            // Simulate payment processing
+            payNowBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            payNowBtn.disabled = true;
+            
+            setTimeout(() => {
+                paymentModal.classList.remove('active');
+                successMessage.style.display = 'block';
+                document.body.style.overflow = 'auto';
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Reset for next purchase
+                setTimeout(() => {
+                    payNowBtn.innerHTML = '<i class="fas fa-lock"></i> Pay Now';
+                    payNowBtn.disabled = false;
+                    paymentOptions.forEach(opt => opt.classList.remove('active'));
+                    selectedPaymentMethod = '';
+                }, 2000);
+            }, 2000);
+        });
+        
+        // Package prices and details
+        const packages = {
+            basic: {
+                name: 'Basic Package',
+                price: '₱5,000',
+                features: [
+                    'Inventory Management System',
+                    'Excel Data Import/Export',
+                    'Basic Reporting',
+                    '30 Days Support'
+                ]
+            },
+            pro: {
+                name: 'Pro Package',
+                price: '₱10,000',
+                features: [
+                    'Everything in Basic',
+                    'Advanced Analytics Dashboard',
+                    'Automated Reports',
+                    'Custom Forms',
+                    '90 Days Support'
+                ]
+            },
+            enterprise: {
+                name: 'Enterprise Package',
+                price: '₱20,000',
+                features: [
+                    'Everything in Pro',
+                    'Multi-User Access',
+                    'API Integration',
+                    'Priority Support',
+                    'Custom Development',
+                    '1 Year Support'
+                ]
+            }
+        };
+    </script>
+    // Update the form submit handler in get-quote.html
+quoteForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const submitBtn = quoteForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    
+    try {
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        submitBtn.disabled = true;
+        
+        const formData = new FormData();
+        formData.append('name', quoteForm.querySelector('input[type="text"]').value);
+        formData.append('email', quoteForm.querySelector('input[type="email"]').value);
+        formData.append('company', quoteForm.querySelectorAll('input[type="text"]')[1].value);
+        formData.append('businessType', quoteForm.querySelector('select').value);
+        formData.append('description', quoteForm.querySelector('textarea').value);
+        
+        if (fileInput.files[0]) {
+            formData.append('excelFile', fileInput.files[0]);
+        }
+        
+        const response = await fetch('http://localhost:5000/api/upload-quote', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            alert(`Quote generated successfully! Estimated cost: ₱${data.quoteAmount.toLocaleString()}`);
+            
+            // Store quote ID for later use
+            localStorage.setItem('currentQuoteId', data.quoteId);
+            
+            // Update package prices based on quote
+            updatePackagePrices(data.quoteAmount);
+            
+        } else {
+            alert('Error: ' + data.error);
+        }
+        
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error submitting quote. Please try again.');
+    } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+});
+
+// Update payment processing
+payNowBtn.addEventListener('click', async () => {
+    if (!selectedPaymentMethod) {
+        alert('Please select a payment method');
+        return;
+    }
+    
+    if (!selectedPackage) {
+        alert('Please select a package');
+        return;
+    }
+    
+    const quoteId = localStorage.getItem('currentQuoteId');
+    if (!quoteId) {
+        alert('Please submit a quote first');
+        return;
+    }
+    
+    // Get customer info from form
+    const customerInfo = {
+        name: quoteForm.querySelector('input[type="text"]').value,
+        email: quoteForm.querySelector('input[type="email"]').value,
+        company: quoteForm.querySelectorAll('input[type="text"]')[1].value,
+        phone: '' // You can add phone field to form
+    };
+    
+    payNowBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    payNowBtn.disabled = true;
+    
+    try {
+        const response = await fetch('http://localhost:5000/api/process-payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                packageType: selectedPackage,
+                paymentMethod: selectedPaymentMethod,
+                customerInfo: customerInfo,
+                quoteId: quoteId
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            if (data.paymentStatus === 'completed') {
+                // Show download link
+                successMessage.innerHTML = `
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2 class="success-title">Payment Successful!</h2>
+                    <p class="success-text">
+                        Thank you for your purchase! Your payment has been confirmed.
+                        <br><br>
+                        <strong>Order ID:</strong> ${data.orderId}<br>
+                        <a href="http://localhost:5000${data.downloadLink}" class="submit-btn" style="max-width: 300px; margin: 20px auto;">
+                            <i class="fas fa-download"></i> Download System
+                        </a>
+                    </p>
+                    <a href="index.html" class="submit-btn" style="max-width: 300px; margin: 0 auto;">
+                        <i class="fas fa-home"></i> Return to Home
+                    </a>
+                `;
+            } else {
+                // Show payment instructions
+                successMessage.innerHTML = `
+                    <div class="success-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h2 class="success-title">Payment Instructions</h2>
+                    <p class="success-text">
+                        Please complete your payment using the following instructions:
+                        <br><br>
+                        <strong>Order ID:</strong> ${data.orderId}<br>
+                        <strong>Instructions:</strong> ${data.instructions}
+                    </p>
+                    <a href="index.html" class="submit-btn" style="max-width: 300px; margin: 0 auto;">
+                        <i class="fas fa-home"></i> Return to Home
+                    </a>
+                `;
+            }
+            
+            paymentModal.classList.remove('active');
+            successMessage.style.display = 'block';
+            document.body.style.overflow = 'auto';
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+            
+        } else {
+            alert('Payment failed: ' + data.error);
+        }
+        
+    } catch (error) {
+        console.error('Payment error:', error);
+        alert('Payment processing failed. Please try again.');
+    } finally {
+        payNowBtn.innerHTML = '<i class="fas fa-lock"></i> Pay Now';
+        payNowBtn.disabled = false;
+        paymentOptions.forEach(opt => opt.classList.remove('active'));
+        selectedPaymentMethod = '';
+    }
+});
+
+function updatePackagePrices(basePrice) {
+    const packages = {
+        basic: basePrice,
+        pro: basePrice * 2,
+        enterprise: basePrice * 4
+    };
+    
+    document.querySelectorAll('.price-card').forEach(card => {
+        const packageType = card.querySelector('.buy-btn').getAttribute('data-package');
+        const priceElement = card.querySelector('.price-amount');
+        priceElement.textContent = `₱${packages[packageType].toLocaleString()}`;
+    });
+}
+</body>
+</html>
