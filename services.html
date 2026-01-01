@@ -3,60 +3,831 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services | DataFlow Pro</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
+    <title>Our Services - IMS | Inventory Management Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #27ae60;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-part-1 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .logo-part-2 {
+            font-size: 14px;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            color: var(--secondary);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+
+        .nav-link.active {
+            color: var(--secondary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, var(--secondary), #2980b9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .services-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
+            color: white;
+            padding: 150px 0 100px;
+            margin-top: 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+
+        .services-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .services-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            background: linear-gradient(135deg, var(--secondary), #2980b9);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .service-content {
+            padding: 30px;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .service-content p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            color: #666;
+        }
+
+        .service-features li i {
+            color: var(--success);
+            margin-right: 10px;
+        }
+
+        .service-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .service-btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        /* Process Section */
+        .process-section {
+            background-color: var(--light);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background-color: var(--secondary);
+            z-index: 1;
+        }
+
+        .process-step {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin: 0 auto 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 5px solid var(--light);
+        }
+
+        .process-step h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary), #2980b9);
+            color: white;
+            padding: 16px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 16px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-menu {
+                gap: 20px;
+            }
+            
+            .services-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 50px;
+            }
+            
+            .process-steps::before {
+                width: 3px;
+                height: 80%;
+                top: 10%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .services-hero {
+                padding: 130px 0 80px;
+            }
+            
+            .services-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation (Same as index.html) -->
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">
-                <span class="logo-part-1">Data</span><span class="logo-part-2">Flow Pro</span>
+                <img src="watermark.png" alt="IMS Logo">
+                <div class="logo-text">
+                    <span class="logo-part-1">IMS</span>
+                    <span class="logo-part-2">Services</span>
+                </div>
             </a>
             <div class="nav-toggle" id="navToggle">
-                <span class="toggle-line"></span>
-                <span class="toggle-line"></span>
-                <span class="toggle-line"></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="services.html" class="nav-link active"><i class="fas fa-cogs"></i> Services</a></li>
-                <li><a href="about.html" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="./pages/about.html" class="nav-link"><i class="fas fa-user"></i> About</a></li>
                 <li><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
-                <li><a href="#" class="btn-nav"><i class="fas fa-chart-line"></i> Get Quote</a></li>
+                <li><a href="get-quote.html" class="btn-nav"><i class="fas fa-chart-line"></i> Get Quote</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Services Page Content -->
-    <main class="services-page">
-        <!-- Hero Section for Services -->
-        <section class="page-hero">
-            <div class="container">
-                <div class="page-hero-content animate-on-scroll">
-                    <h1 class="page-title">Our <span class="highlight">Services</span></h1>
-                    <p class="page-subtitle">Comprehensive data entry and inventory management solutions tailored to your business needs</p>
+    <!-- Hero Section -->
+    <section class="services-hero">
+        <div class="container">
+            <h1>Comprehensive Inventory Management Solutions</h1>
+            <p>Optimize your stock control, reduce costs, and streamline operations with our advanced inventory management services designed for businesses of all sizes.</p>
+            <a href="get-quote.html" class="btn-primary">Get Custom Solution</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Services</h2>
+                <p>We provide end-to-end inventory management solutions that transform how you handle stock, orders, and supply chain operations.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Real-Time Inventory Tracking</h3>
+                        <p>Monitor stock levels, locations, and movements in real-time with our advanced tracking system.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Live stock level monitoring</li>
+                            <li><i class="fas fa-check-circle"></i> Multi-location inventory management</li>
+                            <li><i class="fas fa-check-circle"></i> Automated stock alerts</li>
+                            <li><i class="fas fa-check-circle"></i> Barcode/RFID integration</li>
+                            <li><i class="fas fa-check-circle"></i> Mobile access for on-the-go tracking</li>
+                        </ul>
+                        <a href="get-quote.html" class="service-btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Demand Forecasting & Analytics</h3>
+                        <p>Predict future demand patterns and optimize stock levels using AI-powered analytics.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> AI-based demand prediction</li>
+                            <li><i class="fas fa-check-circle"></i> Seasonal trend analysis</li>
+                            <li><i class="fas fa-check-circle"></i> Sales performance dashboards</li>
+                            <li><i class="fas fa-check-circle"></i> Custom reporting tools</li>
+                            <li><i class="fas fa-check-circle"></i> Inventory turnover optimization</li>
+                        </ul>
+                        <a href="get-quote.html" class="service-btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Automated Reordering System</h3>
+                        <p>Never run out of stock with our intelligent automated purchase order generation.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Smart reorder point calculation</li>
+                            <li><i class="fas fa-check-circle"></i> Vendor management integration</li>
+                            <li><i class="fas fa-check-circle"></i> Purchase order automation</li>
+                            <li><i class="fas fa-check-circle"></i> Lead time consideration</li>
+                            <li><i class="fas fa-check-circle"></i> Bulk order optimization</li>
+                        </ul>
+                        <a href="get-quote.html" class="service-btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Warehouse Management</h3>
+                        <p>Optimize your storage space and improve picking efficiency with our WMS solutions.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Optimal storage layout planning</li>
+                            <li><i class="fas fa-check-circle"></i> Pick-and-pack optimization</li>
+                            <li><i class="fas fa-check-circle"></i> Inventory categorization (ABC analysis)</li>
+                            <li><i class="fas fa-check-circle"></i> Cycle counting automation</li>
+                            <li><i class="fas fa-check-circle"></i> Returns management system</li>
+                        </ul>
+                        <a href="get-quote.html" class="service-btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Supply Chain Integration</h3>
+                        <p>Seamlessly connect with suppliers, distributors, and logistics partners.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Supplier portal integration</li>
+                            <li><i class="fas fa-check-circle"></i> EDI and API connectivity</li>
+                            <li><i class="fas fa-check-circle"></i> Shipment tracking integration</li>
+                            <li><i class="fas fa-check-circle"></i> Multi-channel inventory sync</li>
+                            <li><i class="fas fa-check-circle"></i> Customs and compliance tracking</li>
+                        </ul>
+                        <a href="get-quote.html" class="service-btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Loss Prevention & Audit</h3>
+                        <p>Minimize shrinkage and maintain accurate inventory records with our audit solutions.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Theft detection algorithms</li>
+                            <li><i class="fas fa-check-circle"></i> Regular audit scheduling</li>
+                            <li><i class="fas fa-check-circle"></i> Discrepancy reporting</li>
+                            <li><i class="fas fa-check-circle"></i> Expiry date tracking</li>
+                            <li><i class="fas fa-check-circle"></i> Compliance documentation</li>
+                        </ul>
+                        <a href="get-quote.html" class="service-btn">Learn More</a>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Services Grid -->
-        <section class="services-grid-section">
-            <div class="container">
-                <!-- Add your services content here -->
-                <h2>Our Services Content Goes Here</h2>
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Implementation Process</h2>
+                <p>We follow a structured approach to ensure seamless integration and maximum value from our inventory solutions.</p>
             </div>
-        </section>
-    </main>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Needs Assessment</h4>
+                    <p>We analyze your current inventory processes and identify improvement areas.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Solution Design</h4>
+                    <p>Customized inventory management plan tailored to your business requirements.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Implementation</h4>
+                    <p>Seamless integration with your existing systems and comprehensive training.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Ongoing Support</h4>
+                    <p>Continuous monitoring, optimization, and 24/7 technical support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Footer (Same as index.html) -->
-    <footer class="footer">
-        <!-- Footer content same as index.html -->
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Inventory Management?</h2>
+                <p>Join 500+ businesses that have optimized their stock control and reduced costs by up to 40% with our solutions.</p>
+                <div class="cta-buttons">
+                    <a href="get-quote.html" class="btn-primary"><i class="fas fa-chart-line"></i> Get Your Custom Quote</a>
+                    <a href="contact.html" class="btn-secondary"><i class="fas fa-phone-alt"></i> Schedule a Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>IMS Services</h3>
+                    <p>Providing cutting-edge inventory management and stock control solutions for businesses worldwide since 2010.</p>
+                    <div class="social-links">
+                        <!-- Add social media links here -->
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="./pages/about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="get-quote.html"><i class="fas fa-chevron-right"></i> Get Quote</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Inventory Tracking</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Demand Forecasting</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Warehouse Management</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Supply Chain Integration</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Inventory Auditing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Business Ave, Suite 100</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@imsservices.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM EST</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 IMS Services. All rights reserved. | <a href="#" style="color: #bbb;">Privacy Policy</a> | <a href="#" style="color: #bbb;">Terms of Service</a></p>
+            </div>
+        </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+        
+        // Add animation on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '10px 0';
+                navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.padding = '15px 0';
+                navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
+            }
+        });
+    </script>
 </body>
 </html>
