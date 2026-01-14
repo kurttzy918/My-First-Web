@@ -1222,26 +1222,527 @@
     </style>
 </head>
 <body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - IMS | Inventory Management Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #1a1a2e;
+            --gray: #95a5a6;
+            --success: #27ae60;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            opacity: 0;
+            animation: fadeInBody 1s ease forwards;
+        }
+
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Modern Navigation */
+        .navbar {
+            background: rgba(26, 26, 46, 0.85);
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 0;
+            transform: translateY(-100%);
+            animation: slideDownNav 0.8s ease forwards 0.3s;
+        }
+
+        @keyframes slideDownNav {
+            to { transform: translateY(0); }
+        }
+
+        .navbar.scrolled {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 8px 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Logo Styling */
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            transform: translateX(-50px);
+            opacity: 0;
+            animation: slideInLeft 0.8s ease forwards 0.5s;
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(0) scale(1.02);
+            border-color: rgba(52, 152, 219, 0.3);
+        }
+
+        .logo img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            object-fit: cover;
+            transition: var(--transition);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        .logo:hover img {
+            transform: rotate(5deg) scale(1.08);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-part-1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1.5px;
+            background: linear-gradient(135deg, #fff 0%, #3498db 50%, #00d4ff 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .logo-part-2 {
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: 500;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-link-wrapper {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            padding: 14px 24px;
+            position: relative;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInDown 0.5s ease forwards;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:nth-child(1) { animation-delay: 0.6s; }
+        .nav-link:nth-child(2) { animation-delay: 0.7s; }
+        .nav-link:nth-child(3) { animation-delay: 0.8s; }
+        .nav-link:nth-child(4) { animation-delay: 0.9s; }
+
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-link i {
+            font-size: 18px;
+            transition: var(--transition);
+            color: var(--secondary);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateY(-2px);
+            border-color: rgba(52, 152, 219, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-link:hover i {
+            transform: scale(1.2);
+            color: #00d4ff;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(0, 212, 255, 0.1));
+            color: white;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.2);
+        }
+
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50px;
+            padding: 2px;
+            background: linear-gradient(135deg, #3498db, #00d4ff);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderGlow 3s infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Get Quote Button */
+        .btn-nav {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInDown 0.5s ease forwards 1s;
+        }
+
+        .btn-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.6s;
+            z-index: -1;
+        }
+
+        .btn-nav:hover::before {
+            left: 100%;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(52, 152, 219, 0.6);
+            background: linear-gradient(135deg, #2980b9, #3498db);
+        }
+
+        .btn-nav i {
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .btn-nav:hover i {
+            transform: rotate(15deg) scale(1.2);
+        }
+
+        /* Mobile Toggle Button */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            z-index: 1001;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: rotate(90deg);
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2.5px;
+            background: white;
+            margin: 3px 0;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+            background: #00d4ff;
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+            background: #00d4ff;
+        }
+
+        /* Floating Indicator */
+        .floating-indicator {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: #00d4ff;
+            border-radius: 50%;
+            opacity: 0;
+            transition: var(--transition);
+            box-shadow: 0 0 15px #00d4ff;
+        }
+
+        .nav-link:hover .floating-indicator {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 25px;
+            }
+            
+            .nav-link {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+            
+            .btn-nav {
+                padding: 14px 28px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-menu {
+                gap: 5px;
+            }
+            
+            .nav-link {
+                padding: 10px 16px;
+            }
+            
+            .logo-part-1 {
+                font-size: 28px;
+            }
+            
+            .logo-part-2 {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 320px;
+                height: 100vh;
+                background: rgba(26, 26, 46, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 100px 40px 40px;
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
+                transition: var(--transition);
+                z-index: 999;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-link {
+                width: 100%;
+                justify-content: flex-start;
+                padding: 18px 24px;
+                margin-bottom: 10px;
+                font-size: 18px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 16px;
+            }
+            
+            .nav-link:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+            
+            .btn-nav {
+                width: 100%;
+                justify-content: center;
+                margin-top: 20px;
+                padding: 18px 24px;
+                font-size: 18px;
+            }
+            
+            .logo {
+                background: transparent;
+                border: none;
+                padding: 0;
+            }
+            
+            .logo:hover {
+                background: transparent;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .logo-part-1 {
+                font-size: 24px;
+            }
+            
+            .logo-part-2 {
+                font-size: 14px;
+            }
+            
+            .nav-menu {
+                width: 100%;
+                padding: 100px 30px 40px;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        /* The rest of your CSS remains the same... */
+        /* Only navigation section has been updated */
+
+    </style>
+</head>
+<body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container">
             <a href="index.html" class="logo">
                 <img src="watermark.png" alt="IMS Logo">
                 <div class="logo-text">
                     <span class="logo-part-1">IMS</span>
-                    <span class="logo-part-2">Services</span>
+                    <span class="logo-part-2">Inventory Solutions</span>
                 </div>
             </a>
+            
             <div class="nav-toggle" id="navToggle">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
+            
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="services.html" class="nav-link"><i class="fas fa-cogs"></i> Services</a></li>
-                <li><a href="about.html" class="nav-link active"><i class="fas fa-user"></i> About</a></li>
-                <li><a href="get-quote.html" class="btn-nav"><i class="fas fa-chart-line"></i> Get Quote</a></li>
+                <li class="nav-link-wrapper">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                        <div class="floating-indicator"></div>
+                    </a>
+                </li>
+                <li class="nav-link-wrapper">
+                    <a href="services.html" class="nav-link">
+                        <i class="fas fa-cogs"></i>
+                        <span>Services</span>
+                        <div class="floating-indicator"></div>
+                    </a>
+                </li>
+                <li class="nav-link-wrapper">
+                    <a href="about.html" class="nav-link active">
+                        <i class="fas fa-user"></i>
+                        <span>About</span>
+                        <div class="floating-indicator"></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="get-quote.html" class="btn-nav">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Get Quote</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -1259,6 +1760,9 @@
             <a href="#carousel" class="btn-primary hero-btn"><i class="fas fa-arrow-down"></i> Explore Our Solutions</a>
         </div>
     </section>
+
+    <!-- The rest of your HTML remains exactly the same... -->
+    <!-- Only navigation has been updated -->
 
     <!-- 3D Carousel Section -->
     <section class="carousel-section reveal" id="carousel">
