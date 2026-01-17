@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Styles -->
     <style>
         /* ===== CUSTOM PROPERTIES ===== */
@@ -132,7 +133,85 @@
             70% { width: 85%; }
             100% { width: 100%; }
         }
+        /* Updated Loading Screen with Photo */
+.loading-image-container {
+    text-align: center;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: loadingFadeIn 0.6s var(--transition-smooth) 0.3s forwards;
+}
 
+.loading-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    object-fit: cover;
+    margin-bottom: 2rem;
+    border: 0px solid var(--primary);
+    box-shadow: 
+        0 0 50px var(--accent-glow),
+        0 0 100px rgba(0, 217, 255, 0.3),
+        0 0 150px rgba(0, 217, 255, 0.1);
+    animation: 
+        float 3s ease-in-out infinite,
+        pulse 2s infinite;
+    transition: all 0.4s var(--transition-smooth);
+}
+
+.loading-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.loading-text-part1 {
+    color: var(--primary);
+    font-size: 3rem;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 0 30px var(--accent-glow);
+    letter-spacing: -0.5px;
+}
+
+.loading-text-part2 {
+    color: var(--secondary);
+    font-size: 3rem;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 0 30px var(--accent-glow-secondary);
+    letter-spacing: -0.5px;
+}
+
+.loading-text-part3 {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    margin-top: 10px;
+    letter-spacing: 2px;
+}
+
+/* Fade out animation for page transitions */
+.loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s var(--transition-smooth);
+}
+
+/* Optional: Add a subtle zoom effect on the image */
+@keyframes imageZoom {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.loading-image {
+    animation: 
+        float 3s ease-in-out infinite,
+        pulse 2s infinite,
+        imageZoom 3s ease-in-out infinite;
+}
         /* Page Transition */
         .page-transition {
             position: fixed;
@@ -556,16 +635,24 @@
         }
         
         .video-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 50px;
-            opacity: 0.9;
-            font-family: 'Inter', sans-serif;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            transform: translateY(30px);
-            opacity: 0;
-            animation: fadeInUp 0.8s var(--transition-smooth) 1.4s forwards;
+            font-size: 1.8rem;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 500;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: fadeInUp 0.8s var(--transition-smooth) 1.4s forwards;
+    position: relative;
+    padding: 20px;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         @keyframes fadeInUp {
@@ -3170,21 +3257,77 @@
                 display: none;
             }
         }
+        /* Alternative bold Brevis style */
+.video-subtitle {
+    font-size: 1.8rem;
+    margin-bottom: 50px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: fadeInUp 0.8s var(--transition-smooth) 1.4s forwards;
+    color: white;
+    text-shadow: 
+        0 0 30px rgba(0, 217, 255, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.video-subtitle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(0, 217, 255, 0.1) 50%, 
+        transparent 100%);
+    animation: shimmer 3s infinite linear;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.video-subtitle span {
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+
 }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="loading-logo">
-                <span>IMS</span><span>Services</span>
-            </div>
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
+    <!-- Replace the loading screen section with this: -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-content">
+        <div class="loading-image-container">
+            <img src="1.png" alt="IMS Services Logo" class="loading-image">
+            <div class="loading-text">
+                <span class="loading-text-part1">IMS</span>
+                <span class="loading-text-part2">Services</span>
+                <span class="loading-text-part3">By Courteny</span>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Page Transition -->
     <div class="page-transition" id="pageTransition"></div>
@@ -3236,7 +3379,11 @@
             <div class="highlight">System</div>
         </h1>
     </div>
-    <p class="video-subtitle">Take control of your wholesale, retail, or food industry operations with a powerful, all-in-one Inventory Management Application designed to automate and simplify your Small Business Operations.</p>
+    <p class="video-subtitle">
+    <span>Take full control</span> of your wholesale, retail, or food business with our all-in-one 
+    <span>Inventory Management Solution</span>—automating operations, simplifying processes, 
+    and boosting efficiency.
+</p>
     
     <div class="hero-stats">
         <div class="stat">
@@ -3275,14 +3422,14 @@
                     <div class="parallax-img-container">
                         <img src="sc1.png" alt="Data insights" class="parallax-img">
                         <div class="service-icon">
-                            <i class="fas fa-chart-line"></i>
+                            <i class="fas fa-chart-pie"></i>
                         </div>
                     </div>
                     <div class="parallax-content">
                         <span class="service-badge">Advanced Analytics</span>
                         <h3 class="service-title">Data Insights & Reporting</h3>
                         <p class="service-description">
-                            Transform raw data into actionable insights with our advanced analytics and real-time reporting services. Make informed decisions with precision.
+                            Transform your Inventory with Impressive and dynamic Bar graphs, Pie charts for actionable Data Insights.
                         </p>
                         <ul class="service-features">
                             <li><i class="fas fa-check-circle"></i> Descriptive Statistics</li>
@@ -3299,22 +3446,22 @@
                 <!-- Inventory Card -->
                 <div class="parallax-card">
                     <div class="parallax-img-container">
-                        <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Inventory Management" class="parallax-img">
+                        <img src="sc3.png" alt="Inventory Management" class="parallax-img">
                         <div class="service-icon">
-                            <i class="fas fa-boxes"></i>
+                            <i class="fas fa-warehouse"></i>
                         </div>
                     </div>
                     <div class="parallax-content">
-                        <span class="service-badge">Smart Tracking</span>
-                        <h3 class="service-title">Inventory Management</h3>
+                        <span class="service-badge">Summary</span>
+                        <h3 class="service-title">Inventory Summary</h3>
                         <p class="service-description">
-                            Complete inventory tracking, stock management, and warehouse organization solutions with real-time updates and predictive analytics.
+                            Get a comprehensive overview of your summary automating data extraction and calculation from a detailed inventory sheet to a summary sheet.
                         </p>
                         <ul class="service-features">
-                            <li><i class="fas fa-check-circle"></i> Real-time Stock Tracking</li>
-                            <li><i class="fas fa-check-circle"></i> Smart Warehouse Management</li>
-                            <li><i class="fas fa-check-circle"></i> Demand Forecasting AI</li>
-                            <li><i class="fas fa-check-circle"></i> Inventory Analytics Suite</li>
+                            <li><i class="fas fa-check-circle"></i> Stocks Notifications</li>
+                            <li><i class="fas fa-check-circle"></i> Expiry</li>
+                            <li><i class="fas fa-check-circle"></i> Automated Forms</li>
+                            <li><i class="fas fa-check-circle"></i> Item Lookup</li>
                         </ul>
                         <a href="services.html" class="service-link">
                             Learn More <i class="fas fa-arrow-right"></i>
@@ -3331,8 +3478,8 @@
                         </div>
                     </div>
                     <div class="parallax-content">
-                        <span class="service-badge">Intelligent Automation</span>
-                        <h3 class="service-title">Process Automation</h3>
+                        <span class="service-badge">Automated Forms</span>
+                        <h3 class="service-title">Automated Product Entry</h3>
                         <p class="service-description">
                             Automate your business processes with our intelligent userforms interface, reducing manual work by up to 80% while improving accuracy.
                         </p>
@@ -3356,8 +3503,8 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-tag">DEMO SHOWCASE</div>
-                <h2 class="section-title">See Our <span class="highlight">System</span> In Action</h2>
-                <p class="section-subtitle">Watch how our intelligent inventory management solutions transform complex data into simple, actionable insights</p>
+                <h2 class="section-title">See Our <span class="highlight">System</span>guide clip</h2>
+                <p class="section-subtitle">How it works? Watch the demo</p>
             </div>
             
             <div class="video-demo-container">
@@ -3371,9 +3518,9 @@
             </div>
             
             <div class="video-cta">
-                <p>Discover how our data entry and inventory management solutions can streamline your business operations, reduce costs, and increase efficiency by up to 65%.</p>
+                <p>Watch the demo if how our Inventory Management System works</p>
                 <a href="contact.html" class="btn-primary">
-                    <i class="fas fa-play-circle"></i> Schedule Live Demo
+                    <i class="fas fa-play-circle"></i> Watch
                 </a>
             </div>
         </div>
@@ -3384,8 +3531,8 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-tag">SUCCESS STORIES</div>
-                <h2 class="section-title">Featured <span class="highlight">Implementations</span></h2>
-                <p class="section-subtitle">Real-world success stories from our valued clients across various industries</p>
+                <h2 class="section-title">Features of our <span class="highlight">Inventory Application</span></h2>
+                <p class="section-subtitle">here's the features</p>
             </div>
             
             <div class="carousel-wrapper">
@@ -3415,8 +3562,7 @@
                         <span class="logo-part-1">I</span><span class="logo-part-2">MS</span>
                     </a>
                     <p class="footer-description">
-                        Professional inventory management and data automation solutions for the modern enterprise. 
-                        We streamline your operations with precision, intelligence, and cutting-edge technology.
+                        Inventory Management System helps your business accurate and automated.
                     </p>
                     <div class="footer-social">
                         <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
@@ -3445,7 +3591,7 @@
                         <li><a href="services.html"><i class="fas fa-chevron-right"></i> Inventory Management</a></li>
                         <li><a href="services.html"><i class="fas fa-chevron-right"></i> Process Automation</a></li>
                         <li><a href="services.html"><i class="fas fa-chevron-right"></i> Custom Development</a></li>
-                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Consultation & Training</a></li>
+                        
                     </ul>
                 </div>
                 
@@ -3598,52 +3744,59 @@
         function initCarousel() {
             const carouselItems = [
                 {
-                    icon: 'fas fa-database',
-                    title: 'Enterprise Inventory System',
-                    description: 'Complete inventory management system for retail chain with 500+ SKUs and real-time analytics dashboard.',
-                    tags: ['Inventory', 'ERP', 'Analytics']
+                    icon: 'fas fa-balance-scale',
+                    title: 'Balance In & Out',
+                    description: 'Accurate item movement In & Out with real-time tracking and analytics.',
+                    tags: ['Balance Stock Control', 'Analytics']
+                },
+                
+                {
+                    icon: 'fas fa-calendar-times',
+                    title: 'Expiry Notifications',
+                    description: 'Automated expiry date tracking and notifications for perishable inventory.',
+                    tags: ['Product Expiry Notifications', 'Tracking']
                 },
                 {
-                    icon: 'fas fa-file-excel',
-                    title: 'Data Migration Project',
-                    description: 'Migrated 50,000+ records from legacy system to modern database with 99.9% accuracy.',
-                    tags: ['Migration', 'Excel', 'Automation']
+                    icon: 'fas fa-box-open',
+                    title: 'Re-Order Notifications',
+                    description: 'Automated re-order alerts when stock levels fall below minimum thresholds.',
+                    tags: ['Automated Re-Order', 'for Below stocks Level']
+                },
+                {
+                    icon: 'fas fa-cogs',
+                    title: 'Automated Product Entry Forms',
+                    description: 'Automated Product data entry for Item Master, Stock-in & Stock-out.',
+                    tags: ['Data Automation', 'Efficiency']
+                },
+                {
+                    icon: 'fas fa-coins',
+                    title: 'Sales Monitoring',
+                    description: 'Real-time sales tracking, Budget & Profit Margin Monitoring.',
+                    tags: ['Revenue Monitoring', 'Budgeting', 'Profit Margin']
+                },
+                {
+                    icon: 'fas fa-chart-bar',
+                    title: 'Dashboard Overview',
+                    description: 'Interactive dashboard for sales data visualization with predictive analytics and forecasting.',
+                    tags: ['Data Insights', 'Analytics']
+                },
+                {
+                    icon: 'fas fa-puzzle-piece',
+                    title: 'Product image add-ins',
+                    description: 'Add product images to your inventory management system.',
+                    tags: ['Data visualization']
                 },
                 {
                     icon: 'fas fa-warehouse',
-                    title: 'Warehouse Management Suite',
-                    description: 'Real-time tracking system for warehouse operations with barcode and RFID integration.',
-                    tags: ['Warehouse', 'Tracking', 'RFID']
+                    title: 'Inventory Summary',
+                    description: 'View a comprehensive summary of your inventory status at a glance.',
+                    tags: ['Summary', 'Overview']
                 },
                 {
-                    icon: 'fas fa-chart-pie',
-                    title: 'Sales Analytics Dashboard',
-                    description: 'Interactive dashboard for sales data visualization with predictive analytics and forecasting.',
-                    tags: ['Analytics', 'Dashboard', 'AI']
-                },
-                {
-                    icon: 'fas fa-sync-alt',
-                    title: 'Process Automation Suite',
-                    description: 'Automated data entry processes saving 40+ hours weekly with intelligent form processing.',
-                    tags: ['Automation', 'Efficiency', 'AI']
-                },
-                {
-                    icon: 'fas fa-shipping-fast',
-                    title: 'Supply Chain Optimization',
-                    description: 'End-to-end supply chain tracking with predictive analytics and real-time monitoring.',
-                    tags: ['Supply Chain', 'Optimization', 'AI']
-                },
-                {
-                    icon: 'fas fa-robot',
-                    title: 'AI-Powered Forecasting',
-                    description: 'Machine learning algorithms for demand forecasting with 95% prediction accuracy.',
-                    tags: ['AI', 'Forecasting', 'Machine Learning']
-                },
-                {
-                    icon: 'fas fa-mobile-alt',
-                    title: 'Mobile Inventory App',
-                    description: 'Cross-platform mobile application for inventory management on the go.',
-                    tags: ['Mobile', 'iOS', 'Android']
+                    icon: 'fas fa-search',
+                    title: 'Item Lookup',
+                    description: 'Quickly find and access specific items in your inventory.',
+                    tags: ['Item Lookup']
                 }
             ];
             
