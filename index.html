@@ -2342,10 +2342,275 @@
         justify-content: center;
     }
 }
+/* ===== MOBILE-FRIENDLY LOADING SCREEN ===== */
+
+/* Loading image container adjustments */
+.loading-image-container {
+    text-align: center;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: loadingFadeIn 0.6s var(--transition-smooth) 0.3s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Loading image - responsive */
+.loading-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    border: 3px solid var(--primary);
+    box-shadow: 
+        0 0 30px var(--accent-glow),
+        0 0 60px rgba(0, 217, 255, 0.2),
+        0 0 90px rgba(0, 217, 255, 0.1);
+    animation: 
+        float 3s ease-in-out infinite,
+        pulse 2s infinite;
+    transition: all 0.4s var(--transition-smooth);
+}
+
+/* Loading text - responsive */
+.loading-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+.loading-text-part1 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 0 20px var(--accent-glow);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.loading-text-part2 {
+    color: var(--secondary);
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 0 20px var(--accent-glow-secondary);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.loading-text-part3 {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    margin-top: 8px;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+/* Mobile loading progress bar */
+.loading-progress-mobile {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 280px;
+    display: none; /* Hidden by default, shown on mobile */
+}
+
+.loading-bar-mobile {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loading-fill-mobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--gradient-primary);
+    animation: loadingProgressMobile 1.5s var(--transition-smooth) forwards;
+}
+
+@keyframes loadingProgressMobile {
+    0% { width: 0%; }
+    70% { width: 90%; }
+    100% { width: 100%; }
+}
+
+/* Fade out animation */
+.loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s var(--transition-smooth);
+}
+
+/* Simplified float animation for mobile */
+@keyframes float-mobile {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-mobile {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+    .loading-image {
+        width: 130px;
+        height: 130px;
+        border-width: 2px;
+        margin-bottom: 1.2rem;
+    }
+    
+    .loading-text-part1,
+    .loading-text-part2 {
+        font-size: 2rem;
+    }
+    
+    .loading-text-part3 {
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .loading-progress-mobile {
+        display: block;
+        max-width: 220px;
+    }
+    
+    /* Simplify animations for better mobile performance */
+    .loading-image {
+        animation: 
+            float-mobile 3s ease-in-out infinite,
+            pulse-mobile 2s infinite;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    .loading-image {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 1rem;
+    }
+    
+    .loading-text-part1,
+    .loading-text-part2 {
+        font-size: 1.8rem;
+    }
+    
+    .loading-text-part3 {
+        font-size: 0.8rem;
+        margin-top: 5px;
+    }
+    
+    .loading-image-container {
+        padding: 15px;
+    }
+    
+    .loading-progress-mobile {
+        max-width: 180px;
+        margin-top: 1.5rem;
+    }
+    
+    /* Reduce animation complexity for low-end devices */
+    .loading-image {
+        animation: 
+            float-mobile 4s ease-in-out infinite,
+            pulse-mobile 3s infinite;
+    }
+    
+    /* Remove heavy shadows for better performance */
+    .loading-image {
+        box-shadow: 
+            0 0 20px var(--accent-glow),
+            0 0 40px rgba(0, 217, 255, 0.15);
+    }
+}
+
+/* Small mobile (360px and below) */
+@media (max-width: 360px) {
+    .loading-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .loading-text-part1,
+    .loading-text-part2 {
+        font-size: 1.6rem;
+    }
+    
+    .loading-text-part3 {
+        font-size: 0.75rem;
+        letter-spacing: 0;
+    }
+    
+    .loading-progress-mobile {
+        max-width: 160px;
+    }
+}
+
+/* Landscape mode adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .loading-image-container {
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    .loading-image {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 0;
+    }
+    
+    .loading-text {
+        text-align: left;
+        margin-top: 0;
+    }
+    
+    .loading-progress-mobile {
+        display: none; /* Hide progress bar in landscape */
+    }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .loading-image {
+        border-width: 2px;
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .loading-image,
+    .loading-text-part1,
+    .loading-text-part2,
+    .loading-text-part3 {
+        animation: none !important;
+    }
+    
+    .loading-fill-mobile {
+        animation-duration: 1s;
+    }
     </style>
 </head>
 <body>
-    <!-- Replace the loading screen section with this: -->
+    <!-- Replace the entire loading screen section with this: -->
 <div class="loading-screen" id="loadingScreen">
     <div class="loading-content">
         <div class="loading-image-container">
@@ -2354,6 +2619,12 @@
                 <span class="loading-text-part1">IMS</span>
                 <span class="loading-text-part2">Services</span>
                 <span class="loading-text-part3">By Courteny</span>
+            </div>
+        </div>
+        <!-- Add a progress indicator for mobile -->
+        <div class="loading-progress-mobile">
+            <div class="loading-bar-mobile">
+                <div class="loading-fill-mobile"></div>
             </div>
         </div>
     </div>
@@ -2806,7 +3077,7 @@
             const videos = [
                 {
                     id: 1,
-                    title: "Inventory System Overview",
+                    title: "Inventory Management System",
                     description: "A complete walkthrough of our inventory management system features and capabilities.",
                     videoUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2078866006251188%2F&show_text=false&width=560",
                     thumbnail: "sc1.png",
@@ -2815,19 +3086,19 @@
                 },
                 {
                     id: 2,
-                    title: "Data Analytics Dashboard",
-                    description: "Learn how to use our analytics dashboard to gain insights into your business.",
-                    videoUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2078866006251188%2F&show_text=false&width=560",
-                    thumbnail: "sc2.png",
+                    title: "Automated Forms and Add-ins Image",
+                    description: "Learn how to use our inventory management system to streamline your operations.",
+                    videoUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F32304947462452525%2F&show_text=false&width=560",
+                    thumbnail: "qw.png",
                     duration: "3:45",
                     views: "850"
                 },
                 {
                     id: 3,
-                    title: "Automated Forms Tutorial",
-                    description: "See how our automated forms can streamline your data entry process.",
-                    videoUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2078866006251188%2F&show_text=false&width=560",
-                    thumbnail: "sc3.png",
+                    title: "Web Development",
+                    description: "Learn how to develop your Business website",
+                    videoUrl: "https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F839711155611345%2F&show_text=false&width=267&t=0",
+                    thumbnail: "devs.png",
                     duration: "5:20",
                     views: "1.5K"
                 },
@@ -3514,6 +3785,47 @@
             }
         `;
         document.head.appendChild(rippleStyle);
+        // Mobile-friendly loading screen handling
+function initMobileLoading() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const loadingFill = document.querySelector('.loading-fill-mobile');
+    
+    // Check if mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Adjust loading time for mobile
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.pointerEvents = 'none';
+            
+            // Add fade-out class for transition
+            loadingScreen.classList.add('fade-out');
+            
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                // Remove fade-out class after animation
+                setTimeout(() => {
+                    loadingScreen.classList.remove('fade-out');
+                }, 600);
+            }, 600);
+        }, 1500); // Shorter loading time for mobile
+        
+        // Start progress bar animation
+        if (loadingFill) {
+            loadingFill.style.animation = 'loadingProgressMobile 1.5s ease-in-out forwards';
+        }
+    } else {
+        // Original desktop loading behavior
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.pointerEvents = 'none';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 800);
+        }, 2000);
+    }
+}
     </script>
 </body>
 </html>
