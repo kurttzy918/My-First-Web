@@ -1712,6 +1712,101 @@
                 opacity: 0;
             }
         }
+        /* ===== LOGO TEXT INFINITE CAROUSEL ===== */
+.logo-text-carousel {
+    overflow: hidden;
+    width: 260px;
+    position: relative;
+}
+
+.logo-text-track {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: max-content;
+    animation: logoTextScroll 12s linear infinite;
+}
+
+.logo-text-carousel:hover .logo-text-track {
+    animation-play-state: paused;
+}
+
+.logo-text-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+/* Infinite scroll animation */
+@keyframes logoTextScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+/* ===== PAYMENT ICON CAROUSEL ===== */
+.payment-carousel {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.payment-track {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    width: max-content;
+    animation: paymentScroll 14s linear infinite;
+    will-change: transform;
+}
+
+.payment-carousel:hover .payment-track {
+    animation-play-state: paused;
+}
+
+.payment-icon {
+    font-size: 34px;
+    color: #aaa;
+    transition: all 0.3s ease;
+}
+
+.payment-icon:hover {
+    color: #00d4ff;
+    transform: scale(1.15);
+}
+
+/* Infinite scroll */
+@keyframes paymentScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+.payment-carousel::before,
+.payment-carousel::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.payment-carousel::before {
+    left: 0;
+    background: linear-gradient(to right, #0b0b0b, transparent);
+}
+
+.payment-carousel::after {
+    right: 0;
+    background: linear-gradient(to left, #0b0b0b, transparent);
+}
     </style>
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -1745,10 +1840,30 @@
         <div class="container">
             <a href="index.html" class="logo">
                 <img src="watermark.png" alt="IMS Logo">
-                <div class="logo-text">
-                    <span class="logo-part-1">IMS</span>
-                    <span class="logo-part-2">Services</span>
-                </div>
+                <div class="logo-text-carousel">
+  <div class="logo-text-track">
+    <!-- Duplicate set for infinite loop -->
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+  </div>
+</div>
             </a>
             <div class="nav-toggle" id="navToggle">
                 <span></span>
@@ -1945,25 +2060,56 @@
                 
                     
                     <div class="payment-methods">
-                        <h4 class="payment-title">Accepted Payment Methods</h4>
-                        <div class="payment-icons">
-                            <div class="payment-icon">
-                                <i class="fab fa-cc-paypal"></i>
-                            </div>
-                            <div class="payment-icon">
-                                <i class="fas fa-credit-card"></i>
-                            </div>
-                            <div class="payment-icon">
-                                <i class="fas fa-university"></i>
-                            </div>
-                            <div class="payment-icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <h4 class="payment-title">Accepted Payment Methods</h4>
+
+    <div class="payment-carousel">
+        <div class="payment-track">
+
+            <!-- ICON SET -->
+            <div class="payment-item">
+                <i class="fab fa-cc-paypal"></i>
+                <span>PayPal</span>
             </div>
+
+            <div class="payment-item">
+                <i class="fas fa-credit-card"></i>
+                <span>Credit Card</span>
+            </div>
+
+            <div class="payment-item">
+                <i class="fas fa-university"></i>
+                <span>Bank Transfer</span>
+            </div>
+
+            <div class="payment-item">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Mobile Payment</span>
+            </div>
+
+            <!-- DUPLICATE SET -->
+            <div class="payment-item">
+                <i class="fab fa-cc-paypal"></i>
+                <span>PayPal</span>
+            </div>
+
+            <div class="payment-item">
+                <i class="fas fa-credit-card"></i>
+                <span>Credit Card</span>
+            </div>
+
+            <div class="payment-item">
+                <i class="fas fa-university"></i>
+                <span>Bank Transfer</span>
+            </div>
+
+            <div class="payment-item">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Mobile Payment</span>
+            </div>
+
         </div>
+    </div>
+</div>
     </section>
 
     <!-- Payment Modal -->

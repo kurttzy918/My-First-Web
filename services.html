@@ -704,7 +704,7 @@
 
         /* ===== CTA SECTION ===== */
         .cta-section {
-            background: white
+            background: rgb(11, 11, 11);
             color: white;
             padding: 120px 0;
             text-align: center;
@@ -1645,6 +1645,42 @@ img {
 input, textarea, button, select {
     font-size: 16px; /* Prevents iOS zoom */
 }
+/* ===== LOGO TEXT INFINITE CAROUSEL ===== */
+.logo-text-carousel {
+    overflow: hidden;
+    width: 260px;
+    position: relative;
+}
+
+.logo-text-track {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: max-content;
+    animation: logoTextScroll 12s linear infinite;
+}
+
+.logo-text-carousel:hover .logo-text-track {
+    animation-play-state: paused;
+}
+
+.logo-text-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+/* Infinite scroll animation */
+@keyframes logoTextScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
     </style>
 </head>
 <body>
@@ -1656,10 +1692,30 @@ input, textarea, button, select {
         <div class="container">
             <a href="index.html" class="logo">
                 <img src="watermark.png" alt="IMS Logo">
-                <div class="logo-text">
-                    <span class="logo-part-1">IMS</span>
-                    <span class="logo-part-2">Services</span>
-                </div>
+                <div class="logo-text-carousel">
+  <div class="logo-text-track">
+    <!-- Duplicate set for infinite loop -->
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+  </div>
+</div>
             </a>
             <div class="nav-toggle" id="navToggle">
                 <span></span>

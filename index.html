@@ -2607,6 +2607,42 @@
     .loading-fill-mobile {
         animation-duration: 1s;
     }
+    /* ===== LOGO TEXT INFINITE CAROUSEL ===== */
+.logo-text-carousel {
+    overflow: hidden;
+    width: 260px;
+    position: relative;
+}
+
+.logo-text-track {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: max-content;
+    animation: logoTextScroll 12s linear infinite;
+}
+
+.logo-text-carousel:hover .logo-text-track {
+    animation-play-state: paused;
+}
+
+.logo-text-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+/* Infinite scroll animation */
+@keyframes logoTextScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
     </style>
 </head>
 <body>
@@ -2642,10 +2678,30 @@
         <div class="container">
             <a href="index.html" class="logo shine">
                 <img src="watermark.png" alt="IMS Logo">
-                <div class="logo-text">
-                    <span class="logo-part-1">IMS</span>
-                    <span class="logo-part-2">Services</span>
-                </div>
+                <div class="logo-text-carousel">
+  <div class="logo-text-track">
+    <!-- Duplicate set for infinite loop -->
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+
+    <div class="logo-text-item">
+      <span class="logo-part-1">IMS</span>
+      <span class="logo-part-2">Services</span>
+    </div>
+  </div>
+</div>
             </a>
             <div class="nav-toggle" id="navToggle">
                 <span></span>
@@ -2780,7 +2836,7 @@
                     </div>
                     <div class="parallax-content">
                         <span class="service-badge">Automated Forms</span>
-                        <h3 class="service-title">Automated Product Entry</h3>
+                        <h3 class="service-title">Automated Entry</h3>
                         <p class="service-description">
                             Automate your business processes with our intelligent userforms interface, reducing manual work by up to 80% while improving accuracy.
                         </p>
@@ -3080,9 +3136,9 @@
                     title: "Inventory Management System",
                     description: "A complete walkthrough of our inventory management system features and capabilities.",
                     videoUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2078866006251188%2F&show_text=false&width=560",
-                    thumbnail: "sc1.png",
+                    thumbnail: "cour2.png",
                     duration: "4:30",
-                    views: "1.2K"
+                    views: "716"
                 },
                 {
                     id: 2,
@@ -3091,44 +3147,28 @@
                     videoUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F32304947462452525%2F&show_text=false&width=560",
                     thumbnail: "qw.png",
                     duration: "3:45",
-                    views: "850"
+                    views: "1.5k"
                 },
                 {
                     id: 3,
-                    title: "Web Development",
-                    description: "Learn how to develop your Business website",
-                    videoUrl: "https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F839711155611345%2F&show_text=false&width=267&t=0",
-                    thumbnail: "devs.png",
+                    title: "VBA Excel Tutorials",
+                    description: "Excel Tutorials",
+                    videoUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F871121845465580%2F&show_text=false&width=560",
+                    thumbnail: "cour.png",
                     duration: "5:20",
-                    views: "1.5K"
+                    views: "154"
                 },
                 {
                     id: 4,
-                    title: "Inventory Summary Features",
-                    description: "Explore the inventory summary features for quick business insights.",
-                    videoUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2078866006251188%2F&show_text=false&width=560",
-                    thumbnail: "sc1.png",
+                    title: "Advance Excel Tutorials",
+                    description: "Excel Tutorials",
+                    videoUrl:"https://www.facebook.com/plugins/video.php?height=326&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2982767498592977%2F&show_text=false&width=560",
+                    thumbnail: "cour3.png",
                     duration: "2:55",
-                    views: "620"
+                    views: "144"
                 },
-                {
-                    id: 5,
-                    title: "Advanced Reporting Guide",
-                    description: "How to create and customize reports with our advanced reporting tools.",
-                    videoUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2078866006251188%2F&show_text=false&width=560",
-                    thumbnail: "sc2.png",
-                    duration: "6:10",
-                    views: "980"
-                },
-                {
-                    id: 6,
-                    title: "Mobile Access Setup",
-                    description: "Learn how to access your inventory system on mobile devices.",
-                    videoUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2078866006251188%2F&show_text=false&width=560",
-                    thumbnail: "sc3.png",
-                    duration: "3:15",
-                    views: "1.1K"
-                }
+                
+                
             ];
 
             const videoGallery = document.getElementById('videoGallery');
