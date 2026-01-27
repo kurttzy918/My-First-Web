@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#0a0a0a">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <title>IMS Services | Modern Inventory Solutions</title>
+    <title>KURT CREATES | INVENTORY MANAGEMENT SYSTEM</title>
     
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -153,6 +153,7 @@
             font-weight: 400;
             margin-top: 8px;
             letter-spacing: 1px;
+            font-family: 'Poppins', sans-serif;
         }
 
         /* ===== MOBILE-SPECIFIC LOADING ===== */
@@ -328,7 +329,7 @@
             overflow: hidden;
             width: 160px;
             position: relative;
-            height: 40px;
+            height: 50px;
         }
 
         .logo-text-track {
@@ -355,7 +356,7 @@
 
         .logo-part-1 {
             color: var(--primary);
-            font-size: 24px;
+            font-size: 30px;
             font-weight: 900;
             font-family: 'Poppins', sans-serif;
             letter-spacing: -0.5px;
@@ -363,7 +364,7 @@
 
         .logo-part-2 {
             color: var(--secondary);
-            font-size: 24px;
+            font-size: 30px;
             font-weight: 900;
             font-family: 'Poppins', sans-serif;
             letter-spacing: -0.5px;
@@ -444,6 +445,7 @@
             overflow: hidden;
             display: flex;
             align-items: center;
+            padding-top: 160px; /* pushes content below navbar */
         }
         
         .video-container {
@@ -501,6 +503,7 @@
             margin: 0 auto;
             position: relative;
             z-index: 2;
+            margin-top: 60px;
         }
         
         .video-title {
@@ -873,7 +876,103 @@
             color: white;
             line-height: 1.4;
         }
-        
+        /* ===== VIDEO THUMBNAIL HOVER EFFECTS ===== */
+.video-thumbnail {
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.video-gallery:hover .video-thumbnail {
+    filter: blur(3px) brightness(0.7);
+    transform: scale(0.95);
+}
+
+.video-gallery:hover .video-thumbnail:hover {
+    filter: blur(0) brightness(1);
+    transform: scale(1.05);
+    z-index: 2;
+    box-shadow: 0 20px 40px rgba(0, 217, 255, 0.35);
+}
+
+/* Active (selected) video */
+.video-thumbnail.active {
+    filter: blur(0) brightness(1);
+    transform: scale(1.08);
+    box-shadow: 0 25px 50px rgba(0, 217, 255, 0.5);
+    border: 2px solid var(--primary);
+}
+.thumbnail-image {
+    position: relative;
+}
+
+/* Play Icon */
+.thumbnail-image::after {
+    content: "\f144";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    color: white;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.4s ease;
+    backdrop-filter: blur(2px);
+}
+
+/* Hover Animation */
+.video-thumbnail:hover .thumbnail-image::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Pulse Effect */
+.video-thumbnail:hover .thumbnail-image::after {
+    animation: playPulse 1.5s infinite;
+}
+
+@keyframes playPulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.85; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.video-title,
+.video-subtitle,
+.hero-stats,
+.hero-buttons {
+    opacity: 0;
+    transform: translateY(40px);
+}
+.video-title.animate {
+    animation: heroFadeUp 0.9s ease forwards;
+}
+
+.video-subtitle.animate {
+    animation: heroFadeUp 1s ease forwards 0.2s;
+}
+
+.hero-stats.animate {
+    animation: heroFadeUp 1s ease forwards 0.4s;
+}
+
+.hero-buttons.animate {
+    animation: heroFadeUp 1s ease forwards 0.6s;
+}
+
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
         /* ===== CAROUSEL ===== */
         .carousel-wrapper {
             position: relative;
@@ -968,21 +1067,24 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 60px;
             margin-bottom: 80px;
+            grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+            align-items: flex-start;
         }
         
         .footer-col {
             display: flex;
             flex-direction: column;
+            margin: auto;
         }
         
         .footer-logo {
-            font-size: 2.5rem;
+            font-size: 5rem;
             font-weight: 900;
             text-decoration: none;
             display: inline-block;
             margin-bottom: 30px;
             font-family: 'Poppins', sans-serif;
-            padding-bottom: 10px;
+            padding-bottom: 5px;
         }
         
         .footer-description {
@@ -991,11 +1093,15 @@
             margin-bottom: 40px;
             font-size: 1.1rem;
             flex-grow: 1;
+            max-width: 380px;
+            font-family: 'Poppins', sans-serif;
         }
         
         .footer-social {
             display: flex;
-            gap: 20px;
+            gap: 14px;
+            margin-top: 30px;
+
         }
         
         .social-icon {
@@ -1011,7 +1117,12 @@
             transition: all 0.4s var(--transition-bounce);
             border: 1px solid var(--glass-border);
         }
-        
+        .social-icon:hover {
+    transform: translateY(-6px) scale(1.05);
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: 0 12px 30px rgba(0, 217, 255, 0.45);
+}
         .footer-title {
             font-size: 1.5rem;
             margin-bottom: 30px;
@@ -1046,14 +1157,51 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            transition: all 0.4s var(--transition-smooth);
+            position: relative;
+            transition: all 0.35s ease;
             padding: 10px 0;
+
         }
-        
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(6px);
+        }
+
+        .footer-links a i {
+    transition: transform 0.35s ease;
+        }
+
+.footer-links a:hover i {
+    transform: translateX(4px);
+}
+.footer-title::after {
+    transition: width 0.4s ease;
+}
+
+.footer-col:hover .footer-title::after {
+    width: 80px;
+}
+.contact-info p {
+    transition: all 0.35s ease;
+}
+
+.contact-info p:hover {
+    color: var(--primary);
+    transform: translateX(6px);
+}
+
+.contact-info p i {
+    transition: transform 0.35s ease;
+}
+
+.contact-info p:hover i {
+    transform: scale(1.2);
+}
+
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
         }
 
         .contact-info p {
@@ -1062,6 +1210,7 @@
             align-items: center;
             gap: 15px;
             padding: 12px 0;
+            font-size: 0.95rem;
         }
         
         .contact-info i {
@@ -1098,13 +1247,9 @@
         }
         
         .footer-bottom {
-            border-top: 1px solid var(--glass-border);
-            padding-top: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
+           flex-direction: column;
+           text-align: center;
+           gap: 20px;
         }
         
         .copyright {
@@ -1124,7 +1269,21 @@
             position: relative;
             padding: 5px 0;
         }
-        
+        @media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .contact-info p {
+        justify-content: center;
+    }
+}
         /* ===== ARROW NAVIGATION ===== */
         #arrowNav {
             position: fixed;
@@ -1374,6 +1533,7 @@
             transform: translateY(0);
             opacity: 1;
         }
+
     </style>
 </head>
 <body>
@@ -1385,7 +1545,7 @@
                 <div class="loading-text">
                     <span class="loading-text-part1">IMS</span>
                     <span class="loading-text-part2">Services</span>
-                    <span class="loading-text-part3">By Courteny</span>
+                    <span class="loading-text-part3">Created By Courteny</span>
                 </div>
             </div>
             <div class="loading-progress-mobile">
@@ -1510,9 +1670,9 @@
                     </div>
                     <div class="parallax-content">
                         <span class="service-badge">Advanced Analytics</span>
-                        <h3 class="service-title">Data Insights & Reporting</h3>
+                        <h3 class="service-title">Business Insights</h3>
                         <p class="service-description">
-                            Transform your Inventory with Impressive and dynamic Bar graphs, Pie charts for actionable Data Insights.
+                            Transform your Inventory with Impressive Dynamic Bar graphs, Pie charts, Slicers and Pivot Tables for actionable Data Insights.
                         </p>
                         <ul class="service-features">
                             <li><i class="fas fa-check-circle"></i> Descriptive Statistics</li>
@@ -1538,7 +1698,7 @@
                         <span class="service-badge">Summary</span>
                         <h3 class="service-title">Inventory Summary</h3>
                         <p class="service-description">
-                            Get a comprehensive overview of your summary automating data extraction and calculation from a detailed inventory sheet to a summary sheet.
+                            Get a comprehensive overview of your summary data from your Inventory such as Sales, Stocks Level and Notifications.
                         </p>
                         <ul class="service-features">
                             <li><i class="fas fa-check-circle"></i> Stocks Notifications</li>
@@ -1564,7 +1724,7 @@
                         <span class="service-badge">Automated Forms</span>
                         <h3 class="service-title">Automated Entry</h3>
                         <p class="service-description">
-                            Automate your business processes with our intelligent userforms interface, reducing manual work by up to 80% while improving accuracy.
+                            Automate your business processes with our automated userforms interface with dynamic command buttons.
                         </p>
                         <ul class="service-features">
                             <li><i class="fas fa-check-circle"></i> Smart Automated Forms</li>
@@ -1587,6 +1747,7 @@
             <div class="section-header">
                 <div class="section-tag">VIDEO DEMOS</div>
                 <h2 class="section-title">See Our <span class="highlight">System</span> In Action</h2>
+                
                 <div class="section-subtitle-carousel">
                     <div class="subtitle-fade">
                         <span>Watch Our Video Guide Clip to Learn More</span>
@@ -1644,9 +1805,14 @@
             <div class="section-header">
                 <div class="section-tag">FEATURES</div>
                 <h2 class="section-title">Inventory<span class="highlight">Application</span></h2>
-                <p class="section-subtitle">Discover our powerful features</p>
+                <div class="section-subtitle-carousel">
+                    <div class="subtitle-fade">
+                        <span>Discover our powerful features</span>
+                        <span>Using our Automated Inventory Application</span>
+                    </div>
+                </div>
             </div>
-            
+         
             <div class="carousel-wrapper">
                 <div class="carousel-container">
                     <div class="carousel-track" id="carouselTrack">
@@ -1663,7 +1829,8 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <a href="index.html" class="footer-logo">
-                        <span class="logo-part-1">I</span><span class="logo-part-2">MS</span>
+                        <span class="logo-part-1">I</span><span class="logo-part-2">MS</span>     
+                
                     </a>
                     <p class="footer-description">
                         Helps your Business especially for Small and Medium Enterprises to automate your Inventory, Sales Tracking and Data Insights with a Budget and User-Friendly Application.
@@ -1703,22 +1870,18 @@
                         <p><i class="fas fa-map-marker-alt"></i> Jeddah, Saudi Arabia</p>
                         <p><i class="fas fa-phone"></i> +966-56-922-6173</p>
                         <p><i class="fas fa-envelope"></i> madronerokurt04@gmail.com</p>
-                        <div class="hours-carousel">
-                            <div class="hours-track">
-                                <p><i class="fas fa-clock"></i> Mon - Fri: 9:00 AM - 6:00 PM</p>
-                                <p><i class="fas fa-clock"></i> Mon - Fri: 9:00 AM - 6:00 PM</p>
-                            </div>
-                        </div>
+                        <p>
+                        <i class="fas fa-clock"></i>
+                            Mon – Fri: 9:00 AM – 6:00 PM
+                        </p>
+                    </div>
+                </div>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p class="copyright">&copy; 2025 IMS Services. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
+                <p>&copy; 2025 IMS Services. All rights reserved. | <a href="#" style="color: var(--primary); text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: var(--primary); text-decoration: none;">Terms of Service</a></p>
             </div>
         </div>
     </footer>
@@ -2098,6 +2261,21 @@
                 });
             }
         }
+        document.addEventListener("click", function (e) {
+    const thumbnail = e.target.closest(".video-thumbnail");
+    if (!thumbnail) return;
+
+    document.querySelectorAll(".video-thumbnail")
+        .forEach(v => v.classList.remove("active"));
+
+    thumbnail.classList.add("active");
+});
+window.addEventListener("load", () => {
+    document.querySelector(".video-title")?.classList.add("animate");
+    document.querySelector(".video-subtitle")?.classList.add("animate");
+    document.querySelector(".hero-stats")?.classList.add("animate");
+    document.querySelector(".hero-buttons")?.classList.add("animate");
+});
     </script>
 </body>
 </html>
