@@ -11,8 +11,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Services - IMS | Inventory Management Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- SCHABO Font - Replace with actual SCHABO font link if available -->
+    <!-- For now using Oswald (tall, condensed) as SCHABO alternative -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Remove playful fonts since we're using SCHABO style -->
     <style>
+        /* SCHABO Font Import - Replace with actual SCHABO if you have it */
+        @font-face {
+            font-family: 'SCHABO';
+            src: url('SCHABO.woff2') format('woff2'),
+                 url('SCHABO.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        /* Fallback to Oswald which has similar tall/bold characteristics */
         * {
             margin: 0;
             padding: 0;
@@ -41,6 +56,8 @@
             --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
             --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            /* SCHABO Font Variables */
+            --font-schabo: 'Oswald', 'SCHABO', sans-serif; /* Fallback chain */
         }
 
         body {
@@ -143,21 +160,24 @@
             gap: 2px;
         }
         
+        /* SCHABO Font for Logo */
         .logo-part-1 {
             color: var(--primary);
             font-size: 30px;
-            font-weight: 900;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: -0.5px;
+            font-weight: 700;
+            font-family: var(--font-schabo);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
             text-shadow: 0 0 20px var(--accent-glow);
         }
         
         .logo-part-2 {
             color: var(--secondary);
             font-size: 30px;
-            font-weight: 900;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: -0.5px;
+            font-weight: 700;
+            font-family: var(--font-schabo);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
             text-shadow: 0 0 20px var(--accent-glow-secondary);
         }
         
@@ -178,7 +198,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             position: relative;
             overflow: hidden;
             background: transparent;
@@ -311,33 +331,41 @@
             padding-top: 5px;
         
         }
+        
+        /* SCHABO Font for Hero Titles */
         .hero-text h2 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-schabo);
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.1;
             color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
+        
         .services-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 5px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 900;
-            line-height: 1.1;
+            font-family: var(--font-schabo);
+            font-weight: 700;
+            line-height: 1;
             background: var(--gradient-primary);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
 
         .services-hero p {
             font-size: 1.2rem;
             color: var(--text-secondary);
             margin-bottom: 40px;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.7;
+            font-family: var(--font-schabo);
+            line-height: 1.5;
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary {
@@ -353,11 +381,13 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-schabo);
             position: relative;
             overflow: hidden;
             text-decoration: none;
             box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary::after {
@@ -391,12 +421,13 @@
             margin-top: 0;
             
         }
+        
         @media (max-width: 768px) {
-    .services-hero {
-        padding: 90px 0 50px;
-        margin-top: 60px;
-    }
-}
+            .services-hero {
+                padding: 90px 0 50px;
+                margin-top: 60px;
+            }
+        }
 
         @keyframes floatImage {
             0% { transform: translateY(0); }
@@ -407,7 +438,7 @@
         .job-title {
             display: block;
             margin-top: 14px;
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-schabo);
             font-size: 17px;
             font-weight: 500;
             letter-spacing: 1px;
@@ -438,22 +469,33 @@
             background: var(--dark-bg);
         }
 
+        /* CENTERED SECTION TITLE */
         .section-title {
             text-align: center;
             margin-bottom: 80px;
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease forwards 0.7s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
 
+        /* SCHABO Font for Section Titles */
         .section-title h2 {
             font-size: 3.5rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
+            font-family: var(--font-schabo);
+            font-weight: 700;
             margin-bottom: 20px;
             background: var(--gradient-primary);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-align: center;
+            width: 100%;
         }
 
         .section-title p {
@@ -461,8 +503,11 @@
             max-width: 600px;
             margin: 0 auto;
             font-size: 1.2rem;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.7;
+            font-family: var(--font-schabo);
+            line-height: 1.5;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-align: center;
         }
 
         .services-grid {
@@ -545,13 +590,16 @@
             padding: 40px;
         }
 
+        /* SCHABO Font for Service Titles */
         .service-content h3 {
             font-size: 1.8rem;
             color: white;
             margin-bottom: 20px;
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-schabo);
             font-weight: 700;
             transition: var(--transition-smooth);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .service-card:hover .service-content h3 {
@@ -562,7 +610,9 @@
             color: var(--text-secondary);
             margin-bottom: 25px;
             line-height: 1.7;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-schabo);
+            font-weight: 400;
+            letter-spacing: 0.3px;
         }
 
         .service-features {
@@ -606,10 +656,12 @@
             font-weight: 600;
             transition: all 0.4s var(--transition-bounce);
             border: none;
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-schabo);
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .service-btn::after {
@@ -707,13 +759,16 @@
             left: 100%;
         }
 
+        /* SCHABO Font for Process Titles */
         .process-step h4 {
             color: white;
             margin-bottom: 15px;
             font-size: 1.5rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
+            font-family: var(--font-schabo);
+            font-weight: 700;
             transition: var(--transition-smooth);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .process-step:hover h4 {
@@ -722,8 +777,10 @@
 
         .process-step p {
             color: var(--text-secondary);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.7;
+            font-family: var(--font-schabo);
+            line-height: 1.5;
+            font-weight: 400;
+            letter-spacing: 0.3px;
         }
 
         /* ===== CTA SECTION ===== */
@@ -752,12 +809,16 @@
             z-index: 2;
         }
 
+        /* SCHABO Font for CTA Title */
         .cta-content h2 {
             font-size: 3rem;
             margin-bottom: 30px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
+            font-family: var(--font-schabo);
+            font-weight: 700;
             text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-align: center;
         }
 
         .cta-content p {
@@ -765,8 +826,11 @@
             max-width: 700px;
             margin: 0 auto 50px;
             opacity: 0.9;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.7;
+            font-family: var(--font-schabo);
+            line-height: 1.5;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-align: center;
         }
 
         .cta-buttons {
@@ -791,7 +855,9 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-schabo);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .btn-secondary::before {
@@ -832,14 +898,17 @@
             margin-bottom: 80px;
         }
 
+        /* SCHABO Font for Footer Titles */
         .footer-column h3 {
             font-size: 1.8rem;
             margin-bottom: 30px;
             color: white;
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-schabo);
             font-weight: 700;
             position: relative;
             padding-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .footer-column h3::after {
@@ -856,7 +925,9 @@
             color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 30px;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-schabo);
+            font-weight: 400;
+            letter-spacing: 0.3px;
         }
 
         .footer-links {
@@ -912,8 +983,10 @@
             padding-top: 40px;
             text-align: center;
             color: var(--text-tertiary);
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-schabo);
             font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.3px;
         }
 
         /* ===== REVEAL ANIMATION ===== */
@@ -1155,12 +1228,14 @@
         }
 
         .cloud-text {
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-schabo);
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary);
             text-align: center;
             line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .cloud-text span {
@@ -1252,591 +1327,113 @@
                 border-top: 15px solid rgba(255, 255, 255, 0.95);
             }
         }
-        /* ===== MOBILE OPTIMIZATION ADDITIONS ===== */
-
-/* 1. Meta viewport enhancement */
-@media screen and (max-width: 768px) {
-    html {
-        font-size: 14px; /* Base font size reduction */
-        -webkit-text-size-adjust: 100%;
-    }
-    
-    /* 2. Touch-friendly tap targets */
-    button, 
-    .btn-primary,
-    .btn-secondary,
-    .btn-nav,
-    .nav-link,
-    .service-link,
-    .social-icon,
-    .carousel-btn,
-    #arrowUp,
-    #arrowDown {
-        min-height: 44px;
-        min-width: 44px;
-    }
-    
-    /* 3. Prevent text overflow */
-    h1, h2, h3, h4, p, .video-title, .section-title {
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        hyphens: auto;
-        -webkit-hyphens: auto;
-    }
-    
-    /* 4. Mobile-specific font size adjustments */
-    .video-title {
-        font-size: clamp(1.8rem, 8vw, 3rem) !important;
-        line-height: 1.2;
-    }
-    
-    .video-subtitle {
-        font-size: clamp(0.9rem, 3.5vw, 1.2rem) !important;
-        line-height: 1.5;
-        padding: 15px !important;
-        margin: 0 10px 30px !important;
-    }
-    
-    .section-title {
-        font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
-    }
-    
-    .section-subtitle {
-        font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
-    }
-    
-    /* 5. Hero section mobile optimization */
-    .video-hero {
-        min-height: auto;
-        padding: 80px 0 40px !important;
-    }
-    
-    .hero-stats {
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-    }
-    
-    .stat {
-        width: 90%;
-        max-width: 300px;
-        margin: 0 auto;
-    }
-    
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-    
-    .btn-primary, .btn-secondary {
-        width: 90%;
-        max-width: 300px;
-        padding: 16px 30px;
-        text-align: center;
-        justify-content: center;
-    }
-    
-    /* 6. Parallax cards optimization */
-    .parallax-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-    
-    .parallax-card {
-        margin: 0 auto;
-        max-width: 95%;
-    }
-    
-    /* 7. Mobile menu improvements */
-    .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background: rgba(10, 10, 10, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        flex-direction: column;
-        padding: 20px;
-        transform: translateX(-100%);
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        overflow-y: auto;
-        z-index: 1001;
-    }
-    
-    .nav-menu.active {
-        transform: translateX(0);
-    }
-    
-    .nav-link {
-        width: 100%;
-        justify-content: flex-start;
-        padding: 16px 20px;
-        font-size: 1.1rem;
-    }
-    
-    .btn-nav {
-        width: 100%;
-        margin-top: 10px;
-        justify-content: center;
-    }
-    
-    /* 8. Carousel mobile optimization */
-    .carousel-section {
-        overflow: hidden;
-    }
-    
-    .carousel-container {
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        padding: 10px 0;
-    }
-    
-    .carousel-container::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .carousel-track {
-        display: flex;
-        gap: 20px;
-        padding: 0 20px;
-        animation: none !important;
-        width: max-content;
-    }
-    
-    .carousel-item {
-        scroll-snap-align: center;
-        width: 85vw;
-        min-width: 85vw;
-        margin: 0;
-        animation: none;
-        flex-shrink: 0;
-    }
-    
-    .carousel-controls {
-        display: none;
-    }
-    
-    /* 9. Video demo optimization */
-    .video-demo-container {
-        margin: 0 10px;
-        border-radius: 15px;
-    }
-    
-    /* 10. Footer mobile optimization */
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .footer-col {
-        text-align: center;
-    }
-    
-    .footer-social {
-        justify-content: center;
-    }
-    
-    .footer-links a {
-        justify-content: center;
-        padding-left: 0 !important;
-    }
-    
-    .footer-links a:hover {
-        padding-left: 15px !important;
-    }
-    
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-    }
-    
-    .footer-bottom-links {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
-    /* 11. Loading screen mobile optimization */
-    .loading-image {
-        width: 150px;
-        height: 150px;
-    }
-    
-    .loading-text-part1,
-    .loading-text-part2 {
-        font-size: 2.5rem !important;
-    }
-    
-    .loading-text-part3 {
-        font-size: 1rem !important;
-    }
-    
-    /* 12. Arrow navigation adjustment */
-    #arrowNav {
-        right: 15px;
-        bottom: 15px;
-    }
-    
-    #arrowUp, #arrowDown {
-        width: 50px;
-        height: 50px;
-    }
-    
-    /* 13. Reduce motion for mobile */
-    @media (prefers-reduced-motion: reduce) {
-        * {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
+        
+        /* Carousel container */
+        .job-carousel {
+            height: 28px; /* controls visible area */
+            overflow: hidden;
+            position: relative;
         }
-    }
-    
-    /* 14. Safe area insets for notch phones */
-    @supports (padding: max(0px)) {
-        .container {
-            padding-left: max(15px, env(safe-area-inset-left));
-            padding-right: max(15px, env(safe-area-inset-right));
+
+        /* Animated wrapper */
+        .job-fade {
+            display: flex;
+            flex-direction: column;
+            animation: fadeUp 6s ease-in-out infinite;
+        }
+
+        /* Job title style */
+        .job-fade span {
+            height: 28px;
+            line-height: 28px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            font-size: 1rem;
+            color: #efefef;
+            font-family: var(--font-schabo);
+            text-transform: uppercase;
+        }
+
+        /* Fade up animation */
+        @keyframes fadeUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            30% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-28px);
+                opacity: 1;
+            }
+            80% {
+                transform: translateY(-28px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-56px);
+                opacity: 0;
+            }
         }
         
-        .video-hero {
-            padding-top: max(80px, env(safe-area-inset-top));
+        /* LOGO TEXT CAROUSEL */
+        .logo-text-carousel {
+            overflow: hidden;
+            width: 260px;
+            position: relative;
+        }
+
+        .logo-text-track {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            width: max-content;
+            animation: logoTextScroll 12s linear infinite;
+        }
+
+        .logo-text-carousel:hover .logo-text-track {
+            animation-play-state: paused;
+        }
+
+        .logo-text-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        /* Infinite scroll animation */
+        @keyframes logoTextScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
         }
         
-        #arrowNav {
-            right: max(15px, env(safe-area-inset-right));
-            bottom: max(15px, env(safe-area-inset-bottom) + 15px);
+        /* Additional centered styles for all titles */
+        .services-hero h1, 
+        .services-hero h2,
+        .section-title h2,
+        .process-step h4,
+        .cta-content h2,
+        .footer-column h3 {
+            text-align: center !important;
+            display: block;
+            width: 100%;
         }
-    }
-}
-
-/* 15. Small mobile devices (under 375px) */
-@media screen and (max-width: 375px) {
-    .container {
-        padding: 0 12px;
-    }
-    
-    .video-title {
-        font-size: clamp(1.5rem, 7vw, 2.2rem) !important;
-    }
-    
-    .logo img {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .logo-part-1,
-    .logo-part-2 {
-        font-size: 24px !important;
-    }
-    
-    .parallax-card {
-        max-width: 100%;
-    }
-    
-    .carousel-item {
-        width: 90vw;
-        min-width: 90vw;
-        padding: 20px;
-    }
-    
-    .stat {
-        padding: 15px;
-    }
-    
-    .stat-number {
-        font-size: 1.8rem;
-    }
-    
-    /* Hide arrow nav on very small screens */
-    #arrowNav {
-        display: none;
-    }
-}
-
-/* 16. Mobile landscape optimization */
-@media screen and (max-width: 768px) and (orientation: landscape) {
-    .video-hero {
-        min-height: 100vh;
-        padding: 60px 0 30px !important;
-    }
-    
-    .nav-menu {
-        height: calc(100vh - 60px);
-        overflow-y: auto;
-    }
-    
-    .hero-stats {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .stat {
-        flex: 0 0 calc(50% - 15px);
-        max-width: calc(50% - 15px);
-    }
-    
-    .loading-image {
-        width: 100px;
-        height: 100px;
-    }
-}
-
-/* 17. Tablet optimization (768px - 1024px) */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-    .video-title {
-        font-size: clamp(2.2rem, 6vw, 3.5rem) !important;
-    }
-    
-    .video-subtitle {
-        font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
-    }
-    
-    .parallax-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .parallax-card:nth-child(3) {
-        grid-column: span 2;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    
-    .hero-stats {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .stat {
-        flex: 0 0 calc(50% - 20px);
-        max-width: calc(50% - 20px);
-    }
-}
-
-/* 18. Prevent zoom on input focus for iOS */
-input, textarea, select {
-    font-size: 16px;
-}
-
-/* 19. Improve scrolling performance */
-html {
-    -webkit-overflow-scrolling: touch;
-}
-
-/* 20. Loading screen specific mobile adjustments */
-@media screen and (max-width: 768px) {
-    .loading-screen {
-        padding: 20px;
-    }
-    
-    .loading-content {
-        transform: scale(0.9);
-    }
-}
-
-/* 21. Disable hover effects on touch devices */
-@media (hover: none) and (pointer: coarse) {
-    .parallax-card:hover,
-    .carousel-item:hover,
-    .stat:hover,
-    .social-icon:hover,
-    .btn-primary:hover,
-    .btn-secondary:hover,
-    .nav-link:hover {
-        transform: none !important;
-    }
-    
-    /* Keep active states for accessibility */
-    .nav-link:active,
-    .btn-primary:active,
-    .btn-secondary:active {
-        transform: scale(0.98) !important;
-    }
-}
-
-/* 22. Modal mobile optimization */
-@media screen and (max-width: 768px) {
-    .modal-content {
-        width: 95%;
-        margin: 10% auto;
-        padding: 20px;
-    }
-}
-
-/* 23. Image optimization for mobile */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* 24. Form elements mobile optimization */
-input, textarea, button, select {
-    font-size: 16px; /* Prevents iOS zoom */
-}
-/* ===== LOGO TEXT INFINITE CAROUSEL ===== */
-.logo-text-carousel {
-    overflow: hidden;
-    width: 260px;
-    position: relative;
-}
-
-.logo-text-track {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    width: max-content;
-    animation: logoTextScroll 12s linear infinite;
-}
-
-.logo-text-carousel:hover .logo-text-track {
-    animation-play-state: paused;
-}
-
-.logo-text-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    white-space: nowrap;
-}
-
-/* Infinite scroll animation */
-@keyframes logoTextScroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-/* Carousel container */
-.job-carousel {
-    height: 28px; /* controls visible area */
-    overflow: hidden;
-    position: relative;
-}
-
-/* Animated wrapper */
-.job-fade {
-    display: flex;
-    flex-direction: column;
-    animation: fadeUp 6s ease-in-out infinite;
-}
-
-/* Job title style */
-.job-fade span {
-    height: 28px;
-    line-height: 28px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    font-size: 1rem;
-
-    /* 👇 CHANGE COLOR HERE */
-    color: #efefef; /* elegant purple */
-}
-
-/* Fade up animation */
-@keyframes fadeUp {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    30% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(-28px);
-        opacity: 1;
-    }
-    80% {
-        transform: translateY(-28px);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-56px);
-        opacity: 0;
-    }
-}
-/* ===== CRITICAL MOBILE FIXES ===== */
-
-/* Fix for Safari 100vh issue */
-@supports (-webkit-touch-callout: none) {
-    .video-hero,
-    .loading-screen {
-        height: -webkit-fill-available;
-    }
-}
-
-/* Prevent text size adjustment on orientation change */
-html {
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-}
-
-/* Fix for mobile tap highlight */
-* {
-    -webkit-tap-highlight-color: transparent;
-}
-
-/* Ensure proper touch scrolling */
-.scrollable {
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
-}
-
-/* Fix for mobile address bars */
-@media (max-height: 700px) and (orientation: landscape) {
-    .video-hero {
-        padding-top: 40px;
-    }
-    
-    .hero-stats {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    
-    .stat {
-        flex: 0 0 48%;
-        margin-bottom: 10px;
-    }
-}
-
-/* iOS momentum scrolling */
-.element {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Hide scrollbars but keep functionality */
-.hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
-/* Mobile performance optimizations */
-@media (max-width: 768px) {
-    /* Reduce GPU layers */
-    .parallax-card,
-    .video-thumbnail,
-    .carousel-item {
-        transform: translateZ(0);
-        backface-visibility: hidden;
-    }
-    
-    /* Optimize animations */
-    .loading-image {
-        animation: floatMobile 4s ease-in-out infinite;
-    }
-}
+        
+        /* Center text in hero section */
+        .hero-text {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
