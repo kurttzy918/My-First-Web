@@ -447,7 +447,7 @@
             overflow: hidden;
             display: flex;
             align-items: center;
-            padding-top: 190px; /* pushes content below navbar */
+            padding-top: 250px; /* pushes content below navbar */
         }
         
         .video-container {
@@ -561,7 +561,7 @@
             color: var(--primary);
             display: block;
             font-family: 'Poppins', sans-serif;
-            margin-bottom: 5px;
+            margin-bottom: 1px;
         }
         
         .stat-label {
@@ -1513,6 +1513,7 @@
         @supports (-webkit-touch-callout: none) {
             .video-hero {
                 height: -webkit-fill-available;
+                padding-top: 250px;
             }
             
             /* Fix for Safari backdrop-filter */
@@ -1525,6 +1526,7 @@
         @supports not (-webkit-touch-callout: none) {
             .video-hero {
                 height: 100vh;
+                padding-top: 250px;
             }
         }
 
