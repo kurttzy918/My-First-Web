@@ -1,0 +1,35 @@
+mutation AddNewCategory($name: String!, $description: String) @auth(level: USER) {
+  category_insert(data: {name: $name, description: $description, createdAt_expr: "request.time"})
+}
+
+query ListAllItems @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  items {
+    id
+    name
+    description
+    price
+    stockQuantity
+    category {
+      id
+      name
+    }
+    owner {
+      id
+      displayName
+    }
+  }
+}
+
+mutation AdjustStockQuantity($id: UUID!, $quantityChange: Int!, $movementType: String!, $notes: String) @auth(level: USER) {
+  stockMovement_insert(data: {itemId: $id, quantityChange: $quantityChange, movementType: $movementType, notes: $notes, recordedById_expr: "auth.uid", createdAt_expr: "request.time"})
+}
+
+query ListMyItems @auth(level: USER) {
+  items(where: {ownerId: {eq_expr: "auth.uid"}}) {
+    id
+    name
+    description
+    price
+    stockQuantity
+  }
+}
